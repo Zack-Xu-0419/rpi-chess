@@ -101,3 +101,4 @@ def calibrate():
 
 # Main Program
 move(home=True)
+calibrate()
