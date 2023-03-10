@@ -30,7 +30,7 @@ def move(x=0, y=0, z=10, home=False, speed=3000):
 
 def edge_det():
     final_res = []
-    camera = picamera.camera()
+    camera = picamera.PiCamera()
     camera.resolution = (640, 480)
     output = np.empty((640, 480, 3))
     camera.capture(output, 'rgb')
