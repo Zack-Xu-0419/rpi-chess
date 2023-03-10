@@ -119,4 +119,5 @@ def edge_det():
 # Main Program
 # calibrate()
 move(home=True)
+move()
 move(boardForward=True)
