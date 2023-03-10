@@ -17,7 +17,7 @@ headers = {
 }
 
 
-def move(x=0, y=0, z=10, home=False, speed=3000):
+def move(x=0, y=0, z=10, home=False, speed=3000, boardForward=False):
     if x > 240 or x < 0:
         return 0
 
@@ -33,6 +33,10 @@ def move(x=0, y=0, z=10, home=False, speed=3000):
     if home:
         json_data = {
             'command': f'G28'
+        }
+    if boardForward:
+        json_data = {
+            'command': f'G0 X0 Y240'
         }
     print(requests.post(
         f'http://{IP}/api/printer/command', headers=headers, json=json_data))
@@ -95,23 +99,24 @@ def edge_det():
 
 
 # Calibrate - Remove ALL CHESS PIECES before calling this
-def calibrate():
-    # Calibrate XYZ Coordinates on 3D printer
-    move(home=True)
-    # Raise the Z coordinate.
-    # Move the x axis to the center in order to be able to see the red dots around the plate.
-    move()
-    sleep(5)
-    nodet = True
-    while nodet:
-        # While not detecting the red dots, move the y coordinate up until it sees 4 red dots.
-        cc[1] += 3
-        move(cc[0], cc[1], cc[2])
-        sleep(0.5)
-        if len(edge_det()) == 4:
-            nodet = False
+# def calibrate():
+#     # Calibrate XYZ Coordinates on 3D printer
+#     move(home=True)
+#     # Raise the Z coordinate.
+#     # Move the x axis to the center in order to be able to see the red dots around the plate.
+#     move()
+#     sleep(5)
+#     nodet = True
+#     while nodet:
+#         # While not detecting the red dots, move the y coordinate up until it sees 4 red dots.
+#         cc[1] += 3
+#         move(cc[0], cc[1], cc[2])
+#         sleep(0.5)
+#         if len(edge_det()) == 4:
+#             nodet = False
 
 
 # Main Program
 sleep(2)
-calibrate()
+# calibrate()
+move(boardForward=True)
