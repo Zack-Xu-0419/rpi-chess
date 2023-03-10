@@ -104,10 +104,10 @@ def calibrate():
     sleep(5)
     nodet = True
     while nodet:
-        sleep(1)
         # While not detecting the red dots, move the y coordinate up until it sees 4 red dots.
-        cc[1] += 5
+        cc[1] += 3
         move(cc[0], cc[1], cc[2])
+        sleep(0.5)
         if len(edge_det()) == 4:
             nodet = False
 
