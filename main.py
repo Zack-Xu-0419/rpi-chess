@@ -4,6 +4,7 @@ import cv2 as cv
 import numpy as np
 from time import sleep
 import picamera
+from picamera.array import PiRGBArray
 
 # Constants
 IP = '0.0.0.0'
@@ -32,9 +33,9 @@ def edge_det():
     final_res = []
     camera = picamera.PiCamera()
     camera.resolution = (640, 480)
-    output = np.empty((640, 480, 3))
-    camera.capture(output, 'rgb')
-    camera.close()
+    rawCapture = PiRGBArray(camera)
+    camera.capture(rawCapture, format="bgr")
+    output = rawCapture.array
 
     hsv_img = cv.cvtColor(output, cv.COLOR_RGB2HSV)
 
