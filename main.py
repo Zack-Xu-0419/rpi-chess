@@ -31,11 +31,12 @@ def move(x=0, y=0, z=10, home=False, speed=3000):
 
 def edge_det():
     final_res = []
-    camera = picamera.PiCamera()
-    camera.resolution = (640, 480)
-    rawCapture = PiRGBArray(camera)
-    camera.capture(rawCapture, format="bgr")
-    output = rawCapture.array
+    with picamera.PiCamera() as camera:
+        camera.resolution = (640, 480)
+        rawCapture = PiRGBArray(camera)
+        camera.capture(rawCapture, format="bgr")
+        output = rawCapture.array
+        camera.close()
 
     hsv_img = cv.cvtColor(output, cv.COLOR_RGB2HSV)
 
