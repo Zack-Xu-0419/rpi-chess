@@ -8,7 +8,7 @@ from picamera.array import PiRGBArray
 
 # Constants
 IP = '0.0.0.0'
-cc = [0, 0, 0]
+cc = [120, 0, 0]
 
 # Movement Functions
 headers = {
@@ -90,17 +90,18 @@ def calibrate():
     # Calibrate XYZ Coordinates on 3D printer
     move(home=True)
     # Raise the Z coordinate.
-    move()
     # Move the x axis to the center in order to be able to see the red dots around the plate.
+    move()
     nodet = True
     while nodet:
+        sleep(1)
         # While not detecting the red dots, move the y coordinate up until it sees 4 red dots.
-        cc[1] += 1
+        cc[1] += 10
         move(cc)
         if len(edge_det()) == 4:
             nodet = False
 
 
 # Main Program
-move(home=True)
+sleep(2)
 calibrate()
