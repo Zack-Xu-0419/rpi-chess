@@ -18,6 +18,15 @@ headers = {
 
 
 def move(x=0, y=0, z=10, home=False, speed=3000):
+    if x > 240 or x < 0:
+        return 0
+
+    if y > 240 or y < 0:
+        return 0
+
+    if z > 50 or z < 0:
+        return 0
+
     json_data = {
         'command': f'G0 X{x} Y{y} Z{z} F1{speed}',
     }
@@ -97,7 +106,7 @@ def calibrate():
     while nodet:
         sleep(1)
         # While not detecting the red dots, move the y coordinate up until it sees 4 red dots.
-        cc[1] += 10
+        cc[1] += 5
         move(cc[0], cc[1], cc[2])
         if len(edge_det()) == 4:
             nodet = False
