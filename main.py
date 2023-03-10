@@ -25,8 +25,8 @@ def move(x=0, y=0, z=10, home=False, speed=3000):
         f'http://{IP}/api/printer/command', headers=headers, json=json_data))
 
 
-def border_det():
-    input = picamera.
+# def border_det():
+#     input = picamera.
 
 # Calibrate - Remove ALL CHESS PIECES before calling this
 
