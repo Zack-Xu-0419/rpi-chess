@@ -14,7 +14,7 @@ output = cv.imread('2.jpg')
 hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
 
 # Define the range of green color in HSV
-lower_green = np.array([60, 100, 25])
+lower_green = np.array([60, 100, 100])
 upper_green = np.array([180, 255, 255])
 
 # Create a mask for green color
@@ -28,7 +28,7 @@ edges = cv.Canny(cv.cvtColor(cv.cvtColor(
 cv.imshow("edge", edges)
 
 circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                          minRadius=10, maxRadius=30, param2=20, minDist=20)
+                          minRadius=10, maxRadius=30, param2=20, minDist=50)
 print(len(circles))
 # ensure at least some circles were found
 if circles is not None:
