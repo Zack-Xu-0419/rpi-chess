@@ -118,6 +118,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     else:
         output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
             detectedEdges[0][0]):int(detectedEdges[1][0])]
+    print(output)
 
     hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
 
