@@ -207,8 +207,8 @@ with picamera.PiCamera() as camera:
     camera.close()
 
 
-move(home=True)
-move(z=50)
-move(boardForward=True)
-sleep(10)
-# pprint.pprint(getBoardState(output=output))
+# move(home=True)
+# move(z=50)
+# move(boardForward=True)
+# sleep(10)
+pprint.pprint(getBoardState(output=output))
