@@ -110,11 +110,14 @@ def edge_det(output):
     return ffinal_res
 
 
-def getBoardState(output):
+def getBoardState(output, edges=[0, 0, 0, 0]):
     detectedEdges = edge_det(output=output)
     print(detectedEdges)
-    output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
-        detectedEdges[0][0]):int(detectedEdges[1][0])]
+    if edges[0] != 0:
+        output = output[edges[0]:edges[1], edges[2]:edges[3]]
+    else:
+        output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
+            detectedEdges[0][0]):int(detectedEdges[1][0])]
 
     hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
 
@@ -213,4 +216,4 @@ with picamera.PiCamera() as camera:
 # move(boardForward=True)
 # sleep(10)
 
-pprint.pprint(getBoardState(output))
+pprint.pprint(getBoardState(output, edges=[125, 436, 539, 45]))
