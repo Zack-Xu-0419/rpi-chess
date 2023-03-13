@@ -97,7 +97,7 @@ cv.imshow("cropped", output)
 hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
 
 # Define the range of green color in HSV
-lower_green = np.array([50, 50, 50])
+lower_green = np.array([40, 50, 50])
 upper_green = np.array([200, 255, 255])
 
 # Create a mask for green color

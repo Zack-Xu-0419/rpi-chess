@@ -140,7 +140,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     cv.imwrite("../result_e.jpg", edges)
 
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                              minRadius=5, maxRadius=13, param2=15, minDist=25)
+                              minRadius=10, maxRadius=26, param2=30, minDist=50)
 
     # print(len(circles))
     # ensure at least some circles were found
@@ -210,7 +210,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 # calibrate()
 
 with picamera.PiCamera() as camera:
-    camera.resolution = (640, 480)
+    camera.resolution = (1280, 960)
     rawCapture = PiRGBArray(camera)
     camera.capture(rawCapture, format="bgr")
     output = rawCapture.array
@@ -222,4 +222,6 @@ with picamera.PiCamera() as camera:
 # move(boardForward=True)
 # sleep(10)
 
-pprint.pprint(getBoardState(output, edges=[45, 436, 125, 539]))
+pprint.pprint(getBoardState(output))
+
+# , edges=[45, 436, 125, 539]
