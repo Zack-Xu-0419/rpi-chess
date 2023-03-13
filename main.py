@@ -112,6 +112,7 @@ def edge_det(output):
 
 def getBoardState(output):
     detectedEdges = edge_det(output=output)
+    print(detectedEdges)
     output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
         detectedEdges[0][0]):int(detectedEdges[1][0])]
 
@@ -211,9 +212,5 @@ with picamera.PiCamera() as camera:
 # move(z=50)
 # move(boardForward=True)
 # sleep(10)
-
-detectedEdges = edge_det(output)
-output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
-    detectedEdges[0][0]):int(detectedEdges[1][0])]
 
 pprint.pprint(getBoardState(output))
