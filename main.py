@@ -132,8 +132,12 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     # Apply the mask to the original image
     result = cv.bitwise_and(output, output, mask=green_mask)
 
+    cv.imwrite("../result_m.jpg", output)
+
     edges = cv.Canny(cv.cvtColor(cv.cvtColor(
         result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY), 50, 100)
+
+    cv.imwrite("../result_e.jpg", output)
 
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
                               minRadius=5, maxRadius=13, param2=15, minDist=25)
@@ -160,7 +164,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         for j in range(8):
             cv.rectangle(output, (const+i * difx, j * dify),
                          (const+(i+1) * difx, (j+1) * dify), (0, 0, 255), 1)
-    cv.imwrite("../result.jpg", output)
+    cv.imwrite("../result_f.jpg", output)
 
     # Start from the top.
 
