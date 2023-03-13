@@ -186,7 +186,12 @@ def rundet():
         camera.capture(rawCapture, format="bgr")
         output = rawCapture.array
         camera.close()
+    fromBlack = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
+    fromWhite = []
+    for i in fromBlack[::-1]:
+        fromWhite.append(i[::-1])
     pprint.pprint(getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2]))
+    pprint.pprint(fromWhite)
 
 
 # move(home=True)
