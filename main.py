@@ -160,6 +160,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         for j in range(8):
             cv.rectangle(output, (const+i * difx, j * dify),
                          (const+(i+1) * difx, (j+1) * dify), (0, 0, 255), 1)
+    cv.imwrite("../result.jpg", output)
 
     # Start from the top.
 
