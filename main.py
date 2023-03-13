@@ -90,7 +90,6 @@ def edge_det(output):
     # print(list(avg))
 
     for i in list(avg):
-        print(i)
         # If is toward the center, throw it away
         centerLeftT = 640/2-50
         centerRightT = 640/2+50
@@ -112,13 +111,11 @@ def edge_det(output):
 
 def getBoardState(output, edges=[0, 0, 0, 0]):
     detectedEdges = edge_det(output=output)
-    print(detectedEdges)
     if edges[0] != 0:
         output = output[edges[0]:edges[1], edges[2]:edges[3]]
     else:
         output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
             detectedEdges[0][0]):int(detectedEdges[1][0])]
-    print(output)
 
     hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
 
@@ -169,7 +166,6 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         for i in range(8):
             rect = [const+i * difx, j * dify, const+(i+1) * difx,
                     (j+1) * dify]  # xMin, yMin, xMax, yMax
-            print(rect)
             # check if a center of a circle is in that range
             isSomething = False
             for (x, y, r) in circles:
