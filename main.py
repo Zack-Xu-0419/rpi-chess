@@ -140,7 +140,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     cv.imwrite("../result_e.jpg", edges)
 
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                              minRadius=10, maxRadius=26, param2=30, minDist=50)
+                              minRadius=5, maxRadius=25, param2=15, minDist=20)
 
     # print(len(circles))
     # ensure at least some circles were found
