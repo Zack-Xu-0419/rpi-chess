@@ -217,4 +217,4 @@ with picamera.PiCamera() as camera:
 # move(boardForward=True)
 # sleep(10)
 
-pprint.pprint(getBoardState(output, edges=[125, 436, 539, 45]))
+pprint.pprint(getBoardState(output, edges=[45, 436, 125, 539]))
