@@ -77,11 +77,12 @@ def edge_det(output):
             ffinal_res[1] = i
         if(i[1] > 400 and i[0] < 200):
             ffinal_res[0] = i
-
+    pprint.pprint(ffinal_res)
+    print("***")
     return ffinal_res
 
 
-output = cv.imread('6.jpg')
+output = cv.imread('9.jpg')
 
 # Crop image:
 # Detect the red dots

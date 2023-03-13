@@ -211,4 +211,5 @@ with picamera.PiCamera() as camera:
 # move(z=50)
 # move(boardForward=True)
 # sleep(10)
-pprint.pprint(getBoardState(output=output))
+
+pprint.pprint(getBoardState(edge_det(output)))
