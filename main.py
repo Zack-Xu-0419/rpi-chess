@@ -188,38 +188,18 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     return board
 
-# Calibrate - Remove ALL CHESS PIECES before calling this
-# def calibrate():
-#     # Calibrate XYZ Coordinates on 3D printer
-#     move(home=True)
-#     # Raise the Z coordinate.
-#     # Move the x axis to the center in order to be able to see the red dots around the plate.
-#     move()
-#     sleep(5)
-#     nodet = True
-#     while nodet:
-#         # While not detecting the red dots, move the y coordinate up until it sees 4 red dots.
-#         cc[1] += 3
-#         move(cc[0], cc[1], cc[2])
-#         sleep(0.5)
-#         if len(edge_det()) == 4:
-#             nodet = False
 
-
-# Main Program
-# calibrate()
-
-with picamera.PiCamera() as camera:
-    camera.resolution = (1280, 960)
-    rawCapture = PiRGBArray(camera)
-    camera.capture(rawCapture, format="bgr")
-    output = rawCapture.array
-    camera.close()
+def rundet():
+    with picamera.PiCamera() as camera:
+        camera.resolution = (1280, 960)
+        rawCapture = PiRGBArray(camera)
+        camera.capture(rawCapture, format="bgr")
+        output = rawCapture.array
+        camera.close()
+    pprint.pprint(getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2]))
 
 
 # move(home=True)
 # move(z=50)
 # move(boardForward=True)
 # sleep(10)
-
-pprint.pprint(getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2]))
