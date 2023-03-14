@@ -189,7 +189,11 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                             difx:const+(i+1) * difx]
                 dif = abs(np.mean(curr) - np.mean(prev))
                 # print(dif)
-                if abs(np.mean(curr) - np.mean(prev)) > 0.3:
+                if abs(np.mean(curr) - np.mean(prev)) > 1:
+                    print(f"{i}::::{j}")
+                    print(dif)
+                    bigDiff.append(i, j)
+                elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
                     print(f"{i}::::{j}")
                     print(dif)
                     bigDiff.append(i, j)
