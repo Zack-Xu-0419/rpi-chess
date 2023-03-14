@@ -243,8 +243,8 @@ def rundet():
     fromBlack = detected[0]
     pieceTo = detected[1]
     # convert the two different movement of piece to uci
-    pieceTo1 = [letters[-(pieceTo[0][0]-8)], pieceTo[0][1]+1]
-    pieceTo2 = [letters[-(pieceTo[1][0]-8)], pieceTo[1][1]+1]
+    pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
+    pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
 
     print(pieceTo1, pieceTo2)
     fromWhite = []
