@@ -239,7 +239,7 @@ def rundet():
         camera.capture(rawCapture, format="bgr")
         output = rawCapture.array
         camera.close()
-    fromBlack = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
+    fromBlack = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])[0]
     fromWhite = []
     dif = [-1, -1]
     for i in fromBlack[::-1]:
