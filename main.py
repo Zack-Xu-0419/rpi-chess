@@ -117,6 +117,9 @@ def edge_det(output):
 
 
 def getBoardState(output, edges=[0, 0, 0, 0]):
+    global previousImg
+    global previousRes
+
     detectedEdges = edge_det(output=output)
     if edges[0] != 0:
         output = output[edges[0]:edges[1], edges[2]:edges[3]]
