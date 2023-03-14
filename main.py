@@ -247,12 +247,15 @@ def rundet():
     # convert the two different movement of piece to uci
     pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
     print(-(pieceTo[0][0]-8)-1, pieceTo[0][1]+1)
-    pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
-    print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
+    pieceTaken = False
 
-    # print(pieceTo1, pieceTo2)
-    pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
-    pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
+    finalCommand = ""
+    try:
+        pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
+        print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
+    except:
+        pieceTaken = True
+
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
@@ -262,17 +265,18 @@ def rundet():
         # print(pieceFrom.__str__() + "FROM")
         pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
 
-    finalCommand = ""
-
-    print(pieceTo1)
-    print(pieceTo2)
-
-    print(pieceFrom)
-
-    if pieceTo1 == pieceFrom:
-        finalCommand = f"{pieceFrom}{pieceTo2}"
-    elif pieceTo2 == pieceFrom:
+    if pieceTaken:
         finalCommand = f"{pieceFrom}{pieceTo1}"
+    else:
+
+        # print(pieceTo1, pieceTo2)
+        pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
+        pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
+
+        if pieceTo1 == pieceFrom:
+            finalCommand = f"{pieceFrom}{pieceTo2}"
+        elif pieceTo2 == pieceFrom:
+            finalCommand = f"{pieceFrom}{pieceTo1}"
     previousRes = fromWhite
     board.push(chess.Move.from_uci(finalCommand))
     print(board)
