@@ -178,15 +178,18 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         row = []
         for i in range(8):
             # Compare the Color of each square of previous image vs current:
-            prev = previousImg[j * dify:(j+1) * dify,
-                               const+i * difx:const+(i+1) * difx]
-            curr = gray[j * dify:(j+1) * dify, const+i *
-                        difx:const+(i+1) * difx]
-            dif = abs(np.mean(curr) - np.mean(prev))
-            print(dif)
-            if abs(np.mean(curr) - np.mean(prev)) > 100:
-                print(f"{i}::::{j}")
-                bigDiff.append(i, j)
+            try:
+                prev = previousImg[j * dify:(j+1) * dify,
+                                   const+i * difx:const+(i+1) * difx]
+                curr = gray[j * dify:(j+1) * dify, const+i *
+                            difx:const+(i+1) * difx]
+                dif = abs(np.mean(curr) - np.mean(prev))
+                print(dif)
+                if abs(np.mean(curr) - np.mean(prev)) > 100:
+                    print(f"{i}::::{j}")
+                    bigDiff.append(i, j)
+            except:
+                pass
 
             rect = [const+i * difx, j * dify, const+(i+1) * difx,
                     (j+1) * dify]  # xMin, yMin, xMax, yMax
