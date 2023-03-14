@@ -243,7 +243,7 @@ def rundet():
     fromBlack = detected[0]
     pieceTo = detected[1]
     for i in pieceTo:
-        print(8-i[0], i[1])
+        print(-(i[0]-8), i[1])
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
