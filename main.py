@@ -266,7 +266,7 @@ def rundet():
     print(pieceTo1)
     print(pieceTo2)
 
-    print(pieceFrom + "asdfasdf")
+    print(pieceFrom)
 
     if pieceTo1 == pieceFrom:
         finalCommand = f"{pieceFrom}{pieceTo2}"
