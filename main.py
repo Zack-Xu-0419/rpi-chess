@@ -285,10 +285,12 @@ def rundet():
 
 def getMove():
     fish.set_fen_position(board.fen())
-    fish.get_best_move()
+    best_move = fish.get_best_move()
+    return best_move
     # Track moves:
 
     # move(home=True)
     # move(z=50)
     # move(boardForward=True)
     # sleep(10)
+
