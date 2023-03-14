@@ -7,6 +7,7 @@ import picamera
 from picamera.array import PiRGBArray
 import pprint
 import chess
+import stockfish
 
 # Constants
 IP = '0.0.0.0'
@@ -16,6 +17,7 @@ previousImg = np.array([])
 
 board = chess.Board()
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+fish = stockfish.Stockfish("../../Stockfish-sf_15/src/stockfish")
 
 
 # Movement Functions
@@ -281,10 +283,12 @@ def rundet():
     return fromWhite, pieceFrom, pieceTo, finalCommand
 
 
-# Track moves:
+def getMove():
+    fish.set_fen_position(board.fen())
+    fish.get_best_move()
+    # Track moves:
 
-
-# move(home=True)
-# move(z=50)
-# move(boardForward=True)
-# sleep(10)
+    # move(home=True)
+    # move(z=50)
+    # move(boardForward=True)
+    # sleep(10)
