@@ -190,12 +190,12 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 dif = abs(np.mean(curr) - np.mean(prev))
                 # print(dif)
                 if abs(np.mean(curr) - np.mean(prev)) > 1:
-                    print(f"{i}::::{j}")
-                    print(dif)
+                    # print(f"{i}::::{j}")
+                    # print(dif)
                     bigDiff.append([i, j])
                 elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
-                    print(f"{i}::::{j}")
-                    print(dif)
+                    # print(f"{i}::::{j}")
+                    # print(dif)
                     bigDiff.append([i, j])
             except:
                 pass
@@ -246,7 +246,7 @@ def rundet():
     pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
     pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
 
-    print(pieceTo1, pieceTo2)
+    # print(pieceTo1, pieceTo2)
     pieceTo1 = f"{pieceTo1[0]}{pieceTo1[0]}"
     pieceTo2 = f"{pieceTo2[0]}{pieceTo2[0]}"
     fromWhite = []
@@ -255,13 +255,19 @@ def rundet():
         fromWhite.append(i[::-1])
     if previousRes != []:
         pieceFrom = getBoardDiff(fromWhite)
-        print(pieceFrom.__str__() + "FROM")
+        # print(pieceFrom.__str__() + "FROM")
         try:
             pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
         except:
             pieceFrom = "NA"
 
     finalCommand = ""
+
+    print(pieceTo1)
+    print(pieceTo2)
+
+    print(pieceFrom)
+
     if pieceTo1 == pieceFrom:
         finalCommand = f"{pieceFrom}{pieceTo2}"
     elif pieceTo2 == pieceFrom:
