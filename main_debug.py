@@ -6,10 +6,15 @@ from time import sleep
 import picamera
 from picamera.array import PiRGBArray
 import pprint
+import chess
+
 
 # Constants
 IP = '0.0.0.0'
 cc = [120, 120, 0]
+
+board = chess.Board()
+
 
 # Movement Functions
 headers = {

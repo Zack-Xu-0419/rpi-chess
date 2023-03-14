@@ -6,10 +6,17 @@ from time import sleep
 import picamera
 from picamera.array import PiRGBArray
 import pprint
+import chess
 
 # Constants
 IP = '0.0.0.0'
 cc = [120, 120, 0]
+previousRes = []
+previousImg = np.array()
+
+board = chess.Board()
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
 
 # Movement Functions
 headers = {
@@ -129,8 +136,13 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     # Apply the mask to the original image
     result = cv.bitwise_and(output, output, mask=green_mask)
 
-    edges = cv.Canny(cv.cvtColor(cv.cvtColor(
-        result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY), 50, 100)
+    gray = cv.cvtColor(cv.cvtColor(
+        result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY)
+
+    # Save output:
+    origCropped = gray
+
+    edges = cv.Canny(gray, 50, 100)
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
                               minRadius=5, maxRadius=25, param2=15, minDist=20)
 
@@ -160,10 +172,22 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     # Start from the top.
 
     board = []
+    bigDiff = []
     for j in range(8):
         # For each row
         row = []
         for i in range(8):
+            # Compare the Color of each square of previous image vs current:
+            prev = previousImg[j * dify:(j+1) * dify,
+                               const+i * difx:const+(i+1) * difx]
+            curr = gray[j * dify:(j+1) * dify, const+i *
+                        difx:const+(i+1) * difx]
+            dif = abs(np.mean(curr) - np.mean(prev))
+            print(dif)
+            if abs(np.mean(curr) - np.mean(prev)) > 100:
+                print(f"{i}::::{j}")
+                bigDiff.append(i, j)
+
             rect = [const+i * difx, j * dify, const+(i+1) * difx,
                     (j+1) * dify]  # xMin, yMin, xMax, yMax
             # check if a center of a circle is in that range
@@ -176,7 +200,20 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 row.append(1)
         board.append(row)
 
-    return board
+    # After comparing, set the previmage to curr image
+    previousImg = gray
+
+    return(board, bigDiff)
+
+
+def getBoardDiff(input, previousImage):
+    # Looks at which square turned from 1 to 0
+    r = []
+    for i in range(len(input)):
+        for j in range(len(input[0])):
+            if previousRes[i][j] == 1 and input[i][j] == 0:
+                r.append(i)
+                r.append(j)
 
 
 def rundet():
@@ -188,10 +225,14 @@ def rundet():
         camera.close()
     fromBlack = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
     fromWhite = []
+    dif = [-1, -1]
     for i in fromBlack[::-1]:
         fromWhite.append(i[::-1])
-    pprint.pprint(getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2]))
-    pprint.pprint(fromWhite)
+    if previousRes != []:
+        dif = getBoardDiff()
+    return(fromWhite, dif)
+
+# Track moves:
 
 
 # move(home=True)
