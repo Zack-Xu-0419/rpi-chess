@@ -12,7 +12,7 @@ import chess
 IP = '0.0.0.0'
 cc = [120, 120, 0]
 previousRes = []
-previousImg = np.array()
+previousImg = np.array([])
 
 board = chess.Board()
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
