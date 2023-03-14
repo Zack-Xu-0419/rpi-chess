@@ -190,7 +190,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 curr = gray[j * dify:(j+1) * dify, const+i *
                             difx:const+(i+1) * difx]
                 dif = abs(np.mean(curr) - np.mean(prev))
-                # print(dif)
+                print(dif)
                 if abs(np.mean(curr) - np.mean(prev)) > 0.6:
                     print(f"{i}::::{j}")
                     print(dif)
