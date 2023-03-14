@@ -247,6 +247,8 @@ def rundet():
     pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
 
     print(pieceTo1, pieceTo2)
+    pieceTo1 = f"{pieceTo1[0]}{pieceTo1[0]}"
+    pieceTo2 = f"{pieceTo2[0]}{pieceTo2[0]}"
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
@@ -258,8 +260,14 @@ def rundet():
             pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
         except:
             pieceFrom = "NA"
+
+    finalCommand = ""
+    if pieceTo1 == pieceFrom:
+        finalCommand = f"{pieceFrom}{pieceTo2}"
+    elif pieceTo2 == pieceFrom:
+        finalCommand = f"{pieceFrom}{pieceTo1}"
     previousRes = fromWhite
-    return fromWhite, pieceFrom, pieceTo
+    return fromWhite, pieceFrom, pieceTo, finalCommand
 
 # Track moves:
 
