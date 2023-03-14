@@ -247,8 +247,8 @@ def rundet():
     pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
 
     # print(pieceTo1, pieceTo2)
-    pieceTo1 = f"{pieceTo1[0]}{pieceTo1[0]}"
-    pieceTo2 = f"{pieceTo2[0]}{pieceTo2[0]}"
+    pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
+    pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
