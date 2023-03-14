@@ -247,7 +247,7 @@ def rundet():
     if previousRes != []:
         dif = getBoardDiff(fromWhite)
     previousRes = fromWhite
-    pprint(fromWhite)
+    pprint.pprint(fromWhite)
     return fromWhite, dif
 
 # Track moves:
