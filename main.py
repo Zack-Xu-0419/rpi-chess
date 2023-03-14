@@ -242,8 +242,11 @@ def rundet():
     detected = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
     fromBlack = detected[0]
     pieceTo = detected[1]
-    for i in pieceTo:
-        print(-(i[0]-8), i[1])
+    # convert the two different movement of piece to uci
+    pieceTo1 = [letters[pieceTo[0][0]], pieceTo[0][1]+1]
+    pieceTo2 = [letters[pieceTo[1][0]], pieceTo[1][1]+1]
+
+    print(pieceTo1, pieceTo2)
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
