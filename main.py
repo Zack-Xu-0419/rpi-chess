@@ -192,11 +192,11 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 if abs(np.mean(curr) - np.mean(prev)) > 1:
                     print(f"{i}::::{j}")
                     print(dif)
-                    bigDiff.append(i, j)
+                    bigDiff.append([i, j])
                 elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
                     print(f"{i}::::{j}")
                     print(dif)
-                    bigDiff.append(i, j)
+                    bigDiff.append([i, j])
             except:
                 pass
 
