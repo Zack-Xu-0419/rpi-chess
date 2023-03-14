@@ -215,10 +215,10 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     # After comparing, set the previmage to curr image
     previousImg = gray
 
-    return(board, bigDiff)
+    return board, bigDiff
 
 
-def getBoardDiff(input, previousImage):
+def getBoardDiff(input):
     # Looks at which square turned from 1 to 0
     r = []
     for i in range(len(input)):
@@ -241,8 +241,9 @@ def rundet():
     for i in fromBlack[::-1]:
         fromWhite.append(i[::-1])
     if previousRes != []:
-        dif = getBoardDiff()
-    return(fromWhite, dif)
+        dif = getBoardDiff(fromWhite)
+    previousRes = fromWhite
+    return fromWhite, dif
 
 # Track moves:
 
