@@ -191,7 +191,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                             difx:const+(i+1) * difx]
                 dif = abs(np.mean(curr) - np.mean(prev))
                 # print(dif)
-                if abs(np.mean(curr) - np.mean(prev)) > 1:
+                if abs(np.mean(curr) - np.mean(prev)) > 0.6:
                     print(f"{i}::::{j}")
                     print(dif)
                     bigDiff.append([i, j])
@@ -247,15 +247,12 @@ def rundet():
     # convert the two different movement of piece to uci
     pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
     print(-(pieceTo[0][0]-8)-1, pieceTo[0][1]+1)
-    pieceTaken = False
+    pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
+    print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
 
-    finalCommand = ""
-    try:
-        pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
-        print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
-    except:
-        pieceTaken = True
-
+    # print(pieceTo1, pieceTo2)
+    pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
+    pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
@@ -265,18 +262,17 @@ def rundet():
         # print(pieceFrom.__str__() + "FROM")
         pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
 
-    if pieceTaken:
+    finalCommand = ""
+
+    print(pieceTo1)
+    print(pieceTo2)
+
+    print(pieceFrom)
+
+    if pieceTo1 == pieceFrom:
+        finalCommand = f"{pieceFrom}{pieceTo2}"
+    elif pieceTo2 == pieceFrom:
         finalCommand = f"{pieceFrom}{pieceTo1}"
-    else:
-
-        # print(pieceTo1, pieceTo2)
-        pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
-        pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
-
-        if pieceTo1 == pieceFrom:
-            finalCommand = f"{pieceFrom}{pieceTo2}"
-        elif pieceTo2 == pieceFrom:
-            finalCommand = f"{pieceFrom}{pieceTo1}"
     previousRes = fromWhite
     board.push(chess.Move.from_uci(finalCommand))
     print(board)
