@@ -221,12 +221,13 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 def getBoardDiff(input):
     # Looks at which square turned from 1 to 0
     r = []
+    pprint.pprint(previousRes)
+    pprint.pprint(input)
     for i in range(len(input)):
         for j in range(len(input[0])):
             if previousRes[i][j] == 1 and input[i][j] == 0:
                 r.append(i)
                 r.append(j)
-    print(r)
     return r
 
 
