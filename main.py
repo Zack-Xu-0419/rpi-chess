@@ -221,8 +221,8 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 def getBoardDiff(input):
     # Looks at which square turned from 1 to 0
     r = []
-    pprint.pprint(previousRes)
-    pprint.pprint(input)
+    # pprint.pprint(previousRes)
+    # pprint.pprint(input)
     for i in range(len(input)):
         for j in range(len(input[0])):
             if previousRes[i][j] == 1 and input[i][j] == 0:
@@ -239,16 +239,17 @@ def rundet():
         camera.capture(rawCapture, format="bgr")
         output = rawCapture.array
         camera.close()
-    fromBlack = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])[0]
+    detected = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
+    fromBlack = detected[0]
+    pieceTo = detected[1]
     fromWhite = []
-    dif = [-1, -1]
+    pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
         fromWhite.append(i[::-1])
     if previousRes != []:
-        dif = getBoardDiff(fromWhite)
+        pieceFrom = getBoardDiff(fromWhite)
     previousRes = fromWhite
-    pprint.pprint(fromWhite)
-    return fromWhite, dif
+    return fromWhite, pieceFrom, pieceTo
 
 # Track moves:
 
