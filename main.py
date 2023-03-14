@@ -226,6 +226,7 @@ def getBoardDiff(input):
             if previousRes[i][j] == 1 and input[i][j] == 0:
                 r.append(i)
                 r.append(j)
+    return r
 
 
 def rundet():
