@@ -178,6 +178,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     board = []
     bigDiff = []
+    diffs = []
     for j in range(8):
         # For each row
         row = []
@@ -191,7 +192,8 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                             difx:const+(i+1) * difx]
                 dif = np.mean(curr) - np.mean(prev)
                 print(dif)
-                if dif < -0.2:
+                diffs.append([i, j, dif])
+                if abs(np.mean(curr) - np.mean(prev)) > 0.4:
                     print(f"{i}::::{j}")
                     print(dif)
                     bigDiff.append([i, j])
@@ -213,6 +215,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
             if not isSomething:
                 row.append(1)
         board.append(row)
+    print(diffs.sort())
 
     # After comparing, set the previmage to curr image
     previousImg = gray
