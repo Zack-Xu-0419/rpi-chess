@@ -251,6 +251,7 @@ def rundet():
     if previousRes != []:
         pieceFrom = getBoardDiff(fromWhite)
         # print(pieceFrom.__str__() + "FROM")
+        print(pieceFrom)
         pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
         pieceTo = detected[1]
         # convert the two different movement of piece to uci
