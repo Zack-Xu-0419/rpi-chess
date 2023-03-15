@@ -262,20 +262,20 @@ def rundet():
         pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
         pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
 
-    finalCommand = ""
+        finalCommand = ""
 
-    print(pieceTo1)
-    print(pieceTo2)
+        print(pieceTo1)
+        print(pieceTo2)
 
-    print(pieceFrom)
+        print(pieceFrom)
 
-    if pieceTo1 == pieceFrom:
-        finalCommand = f"{pieceFrom}{pieceTo2}"
-    elif pieceTo2 == pieceFrom:
-        finalCommand = f"{pieceFrom}{pieceTo1}"
-    print(finalCommand)
-    previousRes = fromWhite
-    board.push(chess.Move.from_uci(finalCommand))
+        if pieceTo1 == pieceFrom:
+            finalCommand = f"{pieceFrom}{pieceTo2}"
+        elif pieceTo2 == pieceFrom:
+            finalCommand = f"{pieceFrom}{pieceTo1}"
+        print(finalCommand)
+        previousRes = fromWhite
+        board.push(chess.Move.from_uci(finalCommand))
     print(board)
     return fromWhite, pieceFrom, pieceTo, finalCommand
 
