@@ -274,8 +274,9 @@ def rundet():
         elif pieceTo2 == pieceFrom:
             finalCommand = f"{pieceFrom}{pieceTo1}"
         print(finalCommand)
-        previousRes = fromWhite
         board.push(chess.Move.from_uci(finalCommand))
+
+    previousRes = fromWhite
     print(board)
 
 
