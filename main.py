@@ -191,15 +191,15 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 curr = gray[j * dify:(j+1) * dify, const+i *
                             difx:const+(i+1) * difx]
                 dif = np.mean(curr) - np.mean(prev)
+                print(f"{i}::::{j}")
                 print(dif)
-                diffs.append([dif, i, j])
                 if abs(np.mean(curr) - np.mean(prev)) > 0.4:
-                    print(f"{i}::::{j}")
-                    print(dif)
+                    # print(f"{i}::::{j}")
+                    # print(dif)
                     bigDiff.append([i, j])
                 elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
-                    print(f"{i}::::{j}")
-                    print(dif)
+                    # print(f"{i}::::{j}")
+                    # print(dif)
                     bigDiff.append([i, j])
             except:
                 pass
@@ -215,7 +215,6 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
             if not isSomething:
                 row.append(1)
         board.append(row)
-    print(diffs.sort())
 
     # After comparing, set the previmage to curr image
     previousImg = gray
