@@ -243,12 +243,6 @@ def rundet():
         camera.close()
     detected = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
     fromBlack = detected[0]
-    pieceTo = detected[1]
-    # convert the two different movement of piece to uci
-    pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
-    print(-(pieceTo[0][0]-8)-1, pieceTo[0][1]+1)
-    pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
-    print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
 
     # print(pieceTo1, pieceTo2)
     pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
@@ -261,6 +255,12 @@ def rundet():
         pieceFrom = getBoardDiff(fromWhite)
         # print(pieceFrom.__str__() + "FROM")
         pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
+        pieceTo = detected[1]
+        # convert the two different movement of piece to uci
+        pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
+        print(-(pieceTo[0][0]-8)-1, pieceTo[0][1]+1)
+        pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
+        print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
 
     finalCommand = ""
 
@@ -273,6 +273,7 @@ def rundet():
         finalCommand = f"{pieceFrom}{pieceTo2}"
     elif pieceTo2 == pieceFrom:
         finalCommand = f"{pieceFrom}{pieceTo1}"
+    print(finalCommand)
     previousRes = fromWhite
     board.push(chess.Move.from_uci(finalCommand))
     print(board)
