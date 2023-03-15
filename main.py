@@ -244,9 +244,6 @@ def rundet():
     detected = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
     fromBlack = detected[0]
 
-    # print(pieceTo1, pieceTo2)
-    pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
-    pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
     fromWhite = []
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
@@ -261,6 +258,9 @@ def rundet():
         print(-(pieceTo[0][0]-8)-1, pieceTo[0][1]+1)
         pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
         print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
+        # print(pieceTo1, pieceTo2)
+        pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
+        pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
 
     finalCommand = ""
 
