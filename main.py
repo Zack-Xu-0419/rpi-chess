@@ -277,7 +277,6 @@ def rundet():
         previousRes = fromWhite
         board.push(chess.Move.from_uci(finalCommand))
     print(board)
-    return fromWhite, pieceFrom, pieceTo, finalCommand
 
 
 def getMove():
