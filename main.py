@@ -178,7 +178,6 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     board = []
     bigDiff = []
-    diffs = []
     for j in range(8):
         # For each row
         row = []
@@ -190,9 +189,10 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                                    const+i * difx:const+(i+1) * difx]
                 curr = gray[j * dify:(j+1) * dify, const+i *
                             difx:const+(i+1) * difx]
-                dif = np.mean(curr) - np.mean(prev)
-                print(f"{i}::::{j}")
-                print(dif)
+                dif = abs(np.mean(curr) - np.mean(prev))
+                if abs(dif > 0.15):
+                    print(f"{i}::::{j}")
+                    print(dif)
                 if abs(np.mean(curr) - np.mean(prev)) > 0.4:
                     # print(f"{i}::::{j}")
                     # print(dif)
