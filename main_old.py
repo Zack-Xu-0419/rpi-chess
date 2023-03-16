@@ -222,7 +222,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         board.append(row)
 
     sortedDiff = sorted(bigDiff, reverse=True)
-    final_res = sortedDiff[0:2].values()
+    final_res = sortedDiff[0:2]
 
     # After comparing, set the previmage to curr image
     previousImg = gray_orig
