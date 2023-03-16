@@ -261,7 +261,7 @@ def rundet():
     pieceFrom = [-1, -1]
     for i in fromBlack[::-1]:
         fromWhite.append(i[::-1])
-    pprint(fromWhite)
+    pprint.pprint(fromWhite)
     if previousRes != []:
         pieceFrom = getBoardDiff(fromWhite)
         # print(pieceFrom.__str__() + "FROM")
