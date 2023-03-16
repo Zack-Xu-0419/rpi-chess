@@ -144,6 +144,9 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     gray = cv.cvtColor(cv.cvtColor(
         result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY)
 
+    gray_orig = cv.cvtColor(cv.cvtColor(
+        hsv_img, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY)
+
     # Save output:
     origCropped = gray
 
@@ -187,13 +190,13 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
             try:
                 prev = previousImg[j * dify:(j+1) * dify,
                                    const+i * difx:const+(i+1) * difx]
-                curr = gray[j * dify:(j+1) * dify, const+i *
-                            difx:const+(i+1) * difx]
+                curr = gray_orig[j * dify:(j+1) * dify, const+i *
+                                 difx:const+(i+1) * difx]
                 dif = abs(np.mean(curr) - np.mean(prev))
                 if abs(dif > 0.15):
                     print(f"{i}::::{j}")
                     print(dif)
-                if abs(np.mean(curr) - np.mean(prev)) > 0.4:
+                if abs(np.mean(curr) - np.mean(prev)) > 0.6:
                     # print(f"{i}::::{j}")
                     # print(dif)
                     bigDiff.append([i, j])

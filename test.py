@@ -1,29 +1,15 @@
-import chess
-from pprint import pprint
+import cv2
+import numpy as np
 
-board = chess.Board()
+img = cv2.imread("3.jpg")
 
+gray = cv2.cvtColor(img, cv2.COLOR_BGRA2GRAY)
 
-board.push(chess.Move.from_uci("e2e4"))
-board.push(chess.Move.from_uci("e7e5"))
-board.push(chess.Move.from_uci("g1f3"))
-board.push(chess.Move.from_uci("g7g5"))
+gray = cv2.GaussianBlur(gray, (5, 5), 0)
 
-a = board.__str__()
-print(a)
+edges = cv2.Canny(gray, 50, 150, apertureSize=3)
 
-boardArray = []
+lines = cv2.HoughLines(edges, 1, np.pi/180, 100)
 
-temp = []
-for i in a:
-    if i != ' ' and i != '\n' and i != None:
-        # print(i)
-        if len(temp) < 7:
-            temp.append(i)
-        else:
-            temp.append(i)
-            boardArray.append(temp)
-            temp = []
-
-
-pprint(boardArray)
+cv2.imshow("r", edges)
+cv2.waitKey()

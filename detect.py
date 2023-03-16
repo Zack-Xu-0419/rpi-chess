@@ -82,7 +82,8 @@ def edge_det(output):
     return ffinal_res
 
 
-output = cv.imread('9.jpg')
+output = cv.imread('1.jpg')
+cv.imshow("Orig", output)
 
 # Crop image:
 # Detect the red dots
@@ -92,6 +93,7 @@ print(detectedEdges)
 #                 [0]), int(detectedEdges[1][1]):int(detectedEdges[0][1])]
 output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
     detectedEdges[0][0]):int(detectedEdges[1][0])]
+
 cv.imshow("cropped", output)
 
 hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
@@ -105,9 +107,10 @@ green_mask = cv.inRange(hsv_img, lower_green, upper_green)
 
 # Apply the mask to the original image
 result = cv.bitwise_and(output, output, mask=green_mask)
+gray = cv.cvtColor(cv.cvtColor(
+    result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY)
 
-edges = cv.Canny(cv.cvtColor(cv.cvtColor(
-    result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY), 50, 100)
+edges = cv.Canny(gray, 50, 100)
 cv.imshow("edge", edges)
 
 
@@ -128,6 +131,9 @@ if circles is not None:
         cv.circle(output, (x, y), r, (0, 255, 0), 4)
         cv.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
 
+dify = int(len(output)/8)
+difx = int(len(output[0])/8)
+const = 10
 
 # Drawing the pixles to divide up the grid, development purposes only
 dify = int(len(output)/8)
@@ -135,6 +141,11 @@ difx = int(len(output[0])/8)
 const = 10
 for i in range(8):
     for j in range(8):
+        curr = gray[j * dify:(j+1) * dify, const+i *
+                    difx:const+(i+1) * difx]
+        cv.putText(output, text=str(np.round(np.mean(curr), 5)),
+                   org=(const+i * difx, (j+1) * dify), fontFace=cv.FONT_HERSHEY_COMPLEX, fontScale=0.3, color=(0, 255, 0), thickness=1)
+
         cv.rectangle(output, (const+i * difx, j * dify),
                      (const+(i+1) * difx, (j+1) * dify), (0, 0, 255), 1)
 
