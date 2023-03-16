@@ -197,6 +197,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 if abs(dif > 1):
                     print(f"{i}::::{j}")
                     print([letters[-(i-8)-1], j+1])
+                    print(dif)
                     bigDiff[dif] = (i, j)
                 # if abs(np.mean(curr) - np.mean(prev)) > 1:
                 #     # print(f"{i}::::{j}")
