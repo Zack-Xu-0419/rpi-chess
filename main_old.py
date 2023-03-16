@@ -8,6 +8,7 @@ from picamera.array import PiRGBArray
 import pprint
 import chess
 import stockfish
+from collections import OrderedDict
 
 # Constants
 IP = '0.0.0.0'
@@ -180,7 +181,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     # Start from the top.
 
     board = []
-    bigDiff = []
+    bigDiff = OrderedDict()
     for j in range(8):
         # For each row
         row = []
@@ -196,15 +197,15 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 if abs(dif > 1):
                     print(f"{i}::::{j}")
                     print([letters[-(i-8)-1], j+1])
-                    print(dif)
-                if abs(np.mean(curr) - np.mean(prev)) > 1:
-                    # print(f"{i}::::{j}")
-                    # print(dif)
-                    bigDiff.append([i, j])
-                elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
-                    # print(f"{i}::::{j}")
-                    # print(dif)
-                    bigDiff.append([i, j])
+                    bigDiff[dif] = (i, j)
+                # if abs(np.mean(curr) - np.mean(prev)) > 1:
+                #     # print(f"{i}::::{j}")
+                #     # print(dif)
+                #     bigDiff.append([i, j])
+                # elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
+                #     # print(f"{i}::::{j}")
+                #     # print(dif)
+                #     bigDiff.append([i, j])
             except:
                 pass
 
@@ -220,10 +221,13 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 row.append(1)
         board.append(row)
 
+    sortedDiff = sorted(bigDiff, reverse=True)
+    final_res = sortedDiff[0:2]
+
     # After comparing, set the previmage to curr image
     previousImg = gray_orig
 
-    return board, bigDiff
+    return board, final_res
 
 
 def getBoardDiff(input):
