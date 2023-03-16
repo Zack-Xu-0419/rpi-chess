@@ -264,6 +264,7 @@ def rundet():
     if previousRes != []:
         pieceFrom = getBoardDiff(fromWhite)
         # print(pieceFrom.__str__() + "FROM")
+        print("ORIG INPUT")
         print(pieceFrom)
         pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
         pieceTo = detected[1]
