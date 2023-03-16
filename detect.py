@@ -131,14 +131,12 @@ if circles is not None:
         cv.circle(output, (x, y), r, (0, 255, 0), 4)
         cv.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
 
-dify = int(len(output)/8)
-difx = int(len(output[0])/8)
-const = 10
 
 # Drawing the pixles to divide up the grid, development purposes only
-dify = int(len(output)/8)
+dify = int(len(output)/8)+2
 difx = int(len(output[0])/8)
 const = 10
+consty = +10
 for i in range(8):
     for j in range(8):
         curr = gray[j * dify:(j+1) * dify, const+i *
@@ -146,8 +144,8 @@ for i in range(8):
         cv.putText(output, text=str(np.round(np.mean(curr), 5)),
                    org=(const+i * difx, (j+1) * dify), fontFace=cv.FONT_HERSHEY_COMPLEX, fontScale=0.3, color=(0, 255, 0), thickness=1)
 
-        cv.rectangle(output, (const+i * difx, j * dify),
-                     (const+(i+1) * difx, (j+1) * dify), (0, 0, 255), 1)
+        cv.rectangle(output, (const+i * difx, j * dify-consty),
+                     (const+(i+1) * difx, (j+1) * dify-consty), (0, 0, 255), 1)
 
 # Start from the top.
 

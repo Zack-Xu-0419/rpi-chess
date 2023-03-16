@@ -170,13 +170,14 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                          (x + 5, y + 5), (0, 128, 255), -1)
 
     # Drawing the pixles to divide up the grid, development purposes only
-    dify = int(len(output)/8)
+    dify = int(len(output)/8)+2
     difx = int(len(output[0])/8)
+    consty = +10
     const = 10
     for i in range(8):
         for j in range(8):
-            cv.rectangle(output, (const+i * difx, j * dify),
-                         (const+(i+1) * difx, (j+1) * dify), (0, 0, 255), 1)
+            cv.rectangle(output, (const+i * difx, j * dify+consty),
+                         (const+(i+1) * difx, (j+1) * dify+consty), (0, 0, 255), 1)
 
     # Start from the top.
 
@@ -189,9 +190,9 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
             # Compare the Color of each square of previous image vs current:
             # print(len(previousImg))
             try:
-                prev = previousImg[j * dify:(j+1) * dify,
+                prev = previousImg[j * dify+consty:(j+1) * dify+consty,
                                    const+i * difx:const+(i+1) * difx]
-                curr = gray_orig[j * dify:(j+1) * dify, const+i *
+                curr = gray_orig[j * dify+consty:(j+1) * dify+consty, const+i *
                                  difx:const+(i+1) * difx]
                 dif = abs(np.mean(curr) - np.mean(prev))
                 if abs(dif > 1):
@@ -210,8 +211,8 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
             except:
                 pass
 
-            rect = [const+i * difx, j * dify, const+(i+1) * difx,
-                    (j+1) * dify]  # xMin, yMin, xMax, yMax
+            rect = [const+i * difx, j * dify+consty, const+(i+1) * difx,
+                    (j+1) * dify+consty]  # xMin, yMin, xMax, yMax
             # check if a center of a circle is in that range
             isSomething = False
             for (x, y, r) in circles:
