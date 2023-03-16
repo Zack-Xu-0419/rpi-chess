@@ -220,7 +220,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         board.append(row)
 
     # After comparing, set the previmage to curr image
-    previousImg = gray
+    previousImg = gray_orig
 
     return board, bigDiff
 
