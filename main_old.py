@@ -278,8 +278,12 @@ def rundet():
 
         finalCommand = ""
 
+        print("PIECETO?:")
+
         print(pieceTo1)
         print(pieceTo2)
+
+        print("PIECEFROM:")
 
         print(pieceFrom)
 
