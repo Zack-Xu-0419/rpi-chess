@@ -226,7 +226,8 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     # After comparing, set the previmage to curr image
     previousImg = gray_orig
-    print(final_res + "!!!!")
+    print(final_res)
+    print("!!!!")
 
     return board, final_res
 
