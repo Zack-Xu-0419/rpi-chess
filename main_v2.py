@@ -306,11 +306,11 @@ def rundet():
 
         finalCommand = ""
 
-        print("PIECETO?:")
-        print(pieceTo)
-        print("PIECEFROM:")
+        # print("PIECETO?:")
+        # print(pieceTo)
+        # print("PIECEFROM:")
 
-        print(pieceFrom)
+        # print(pieceFrom)
         finalCommand = f"{pieceFrom}{pieceTo}"
 
         print(finalCommand)
