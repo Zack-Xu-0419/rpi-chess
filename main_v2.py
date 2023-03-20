@@ -293,10 +293,10 @@ def rundet():
         fromWhite.append(i[::-1])
     pprint.pprint(fromWhite)
     if previousRes != []:
-        difference = getBoardDiff(fromWhite)
+        difference = getBoardDiff(fromBlack)
         print(difference)
-        pieceFrom = [letters[-(difference[0][1]-8)], difference[0][0]+1]
-        pieceTo = [letters[-(difference[1][1]-8)], difference[1][0]+1]
+        pieceFrom = [letters[-(difference[0][0]-8)-1], difference[0][1]+1]
+        pieceTo = [letters[-(difference[1][0]-8)-1], difference[1][1]+1]
 
         finalCommand = ""
 
@@ -305,7 +305,7 @@ def rundet():
         print("PIECEFROM:")
 
         print(pieceFrom)
-        finalCommand
+        finalCommand = f"{pieceFrom}{pieceTo}"
 
         print(finalCommand)
         board.push(chess.Move.from_uci(finalCommand))
