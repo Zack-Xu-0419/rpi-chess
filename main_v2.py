@@ -276,7 +276,7 @@ def getBoardDiff(input):
                 b.append(i)
                 b.append(j)
             # If originally not occupied, and then white, it must be the end
-            if previousRes[i][j] == 0 and input[i][j] == 1:
+            elif previousRes[i][j] == 0 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
 
