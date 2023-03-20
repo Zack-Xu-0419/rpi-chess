@@ -217,10 +217,10 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                          (x + 5, y + 5), (0, 128, 255), -1)
 
     # Drawing the pixles to divide up the grid, development purposes only
-    dify = int(len(output)/8)+2
-    difx = int(len(output[0])/8)
-    consty = 0
+    dify = int(len(output)/8)
+    difx = int(len(output[0])/8)+3
     const = 0
+    consty = +4
     for i in range(8):
         for j in range(8):
             cv.rectangle(output, (const+i * difx, j * dify+consty),
