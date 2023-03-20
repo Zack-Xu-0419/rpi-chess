@@ -268,9 +268,11 @@ def getBoardDiff(input):
     for i in range(len(input)):
         for j in range(len(input[0])):
             if previousRes[i][j] == 1 and input[i][j] == 0:
-                a.append(i, j)
+                a.append(i)
+                a.append(j)
             elif previousRes[i][j] != 1 and input[i][j] == 1:
-                b.append(i, j)
+                b.append(i)
+                b.append(j)
 
     return (a, b)
 
