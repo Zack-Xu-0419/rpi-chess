@@ -200,7 +200,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     edges = cv.Canny(gray, 50, 100)
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                              minRadius=10, maxRadius=30, param2=15, minDist=30)
+                              minRadius=10, maxRadius=30, param2=18, minDist=30)
 
     # print(len(circles))
     # ensure at least some circles were found
@@ -243,7 +243,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 curr = gray_orig[j * dify+consty:(j+1) * dify+consty, const+i *
                                  difx:const+(i+1) * difx]
                 dif = abs(np.mean(curr) - np.mean(prev))
-                if abs(dif > 1):
+                if abs(dif > 0.5):
                     print(f"{i}::::{j}")
                     print([letters[-(i-8)-1], j+1])
                     print(dif)
