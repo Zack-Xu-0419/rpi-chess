@@ -262,7 +262,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 def getBoardDiff(input):
     # Looks at which square turned from 1 to 0
     a = []
-    b = [1, 2]
+    b = []
     # pprint.pprint(previousRes)
     # pprint.pprint(input)
     for i in range(len(input)):
@@ -272,11 +272,11 @@ def getBoardDiff(input):
                 a.append(i)
                 a.append(j)
             # If originally ocuppied by a black piece, and then white, it must be the end
-            elif previousRes[i][j] == 2 and input[i][j] == 1:
+            if previousRes[i][j] == 2 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
             # If originally not occupied, and then white, it must be the end
-            elif previousRes[i][j] == 0 and input[i][j] == 1:
+            if previousRes[i][j] == 0 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
 
