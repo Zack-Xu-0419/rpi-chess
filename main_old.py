@@ -152,6 +152,16 @@ def crop(input):
     return transformed_img
 
 
+def captureImage():
+    with picamera.PiCamera() as camera:
+        camera.resolution = (1280, 960)
+        rawCapture = PiRGBArray(camera)
+        camera.capture(rawCapture, format="bgr")
+        output = rawCapture.array
+        camera.close()
+    cv.imwrite("originalOut.jpg", output)
+
+
 def getBoardState(output, edges=[0, 0, 0, 0]):
     global previousImg
     global previousRes
