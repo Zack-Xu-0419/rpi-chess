@@ -335,10 +335,10 @@ def getMove():
             letter2 = i
 
     print(letter1, number1)
-    previousRes[letter1][int(number1)] == 0
-    pprint.pprint(previousRes)
+    previousRes[8-int(number1)][letter1] == 0
     print(letter2, number2)
-    previousRes[letter2][int(number2)] == 2
+    previousRes[8-int(number2)][letter2] == 2
+    pprint.pprint(previousRes)
 
     return best_move
     # Track moves:
