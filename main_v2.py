@@ -271,14 +271,14 @@ def getBoardDiff(input):
             if previousRes[i][j] == 1 and input[i][j] == 0:
                 a.append(i)
                 a.append(j)
-            # # If originally ocuppied by a black piece, and then white, it must be the end
-            # if previousRes[i][j] == 2 and input[i][j] == 1:
-            #     b.append(i)
-            #     b.append(j)
-            # # If originally not occupied, and then white, it must be the end
-            # if previousRes[i][j] == 0 and input[i][j] == 1:
-            #     b.append(i)
-            #     b.append(j)
+            # If originally ocuppied by a black piece, and then white, it must be the end
+            if previousRes[i][j] == 2 and input[i][j] == 1:
+                b.append(i)
+                b.append(j)
+            # If originally not occupied, and then white, it must be the end
+            if previousRes[i][j] == 0 and input[i][j] == 1:
+                b.append(i)
+                b.append(j)
 
     return (a, b)
 
@@ -299,7 +299,7 @@ def rundet():
         fromWhite.append(i[::-1])
     pprint.pprint(fromWhite)
     if previousRes != []:
-        difference = getBoardDiff(fromBlack)
+        difference = getBoardDiff(fromWhite)
         print(difference)
         pieceFrom = [letters[-(difference[0][0]-8)-1], difference[0][1]+1]
         pieceTo = [letters[-(difference[1][0]-8)-1], difference[1][1]+1]
