@@ -268,9 +268,9 @@ def getBoardDiff(input):
     for i in range(len(input)):
         for j in range(len(input[0])):
             if previousRes[i][j] == 1 and input[i][j] == 0:
-                a.append([i, j])
+                a.append(i, j)
             elif previousRes[i][j] != 1 and input[i][j] == 1:
-                b.append([i, j])
+                b.append(i, j)
 
     return (a, b)
 
@@ -293,18 +293,17 @@ def rundet():
     if previousRes != []:
         difference = getBoardDiff(fromWhite)
         print(difference)
+        pieceFrom = [letters[-(difference[0][0]-8)-1], difference[0][1]+1]
+        pieceTo = [letters[-(difference[1][0]-8)-1], difference[1][1]+1]
 
         finalCommand = ""
 
         print("PIECETO?:")
+        print(pieceTo)
         print("PIECEFROM:")
 
         print(pieceFrom)
 
-        if pieceTo1 == pieceFrom:
-            finalCommand = f"{pieceFrom}{pieceTo2}"
-        elif pieceTo2 == pieceFrom:
-            finalCommand = f"{pieceFrom}{pieceTo1}"
         print(finalCommand)
         board.push(chess.Move.from_uci(finalCommand))
 
