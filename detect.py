@@ -88,15 +88,15 @@ def crop(input):
 
     # Define 4 points for the crop
     # Top left
-    distort_x1 = 6
-    distort_x2 = 8
-    distort_y1 = 0
-    distort_y2 = 5
+    distort_x1 = 12
+    distort_x2 = 12
+    distort_y1 = -5
+    distort_y2 = -5
 
-    x1 = 140
-    x2 = 540
-    y1 = 40
-    y2 = 430
+    x1 = 290
+    x2 = 1080
+    y1 = 70
+    y2 = 860
 
     src_pts = np.array(
         [[x1+distort_x1, y1+distort_y1], [x2-distort_x2, y1+distort_y2],
@@ -115,7 +115,7 @@ def crop(input):
     return transformed_img
 
 
-output = cv.imread('3.jpg')
+output = cv.imread('originalOut.jpg')
 cv.imshow("Orig", output)
 
 # Crop image:
@@ -144,7 +144,7 @@ cv.imshow("edge", edges)
 
 
 circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                          minRadius=5, maxRadius=13, param2=15, minDist=25)
+                          minRadius=10, maxRadius=25, param2=20, minDist=30)
 
 
 # print(len(circles))
@@ -162,10 +162,10 @@ if circles is not None:
 
 
 # Drawing the pixles to divide up the grid, development purposes only
-dify = int(len(output)/8)+2
-difx = int(len(output[0])/8)
+dify = int(len(output)/8)
+difx = int(len(output[0])/8)+3
 const = 0
-consty = 0
+consty = +4
 for i in range(8):
     for j in range(8):
         curr = gray[j * dify:(j+1) * dify, const+i *
@@ -188,12 +188,12 @@ for j in range(8):
         print(rect)
         # check if a center of a circle is in that range
         isSomething = False
-        for (x, y, r) in circles:
-            if x > rect[0] and x < rect[2] and y > rect[1] and y < rect[3]:
-                isSomething = True
-                row.append(0)
-        if not isSomething:
-            row.append(1)
+        # for (x, y, r) in circles:
+        #     if x > rect[0] and x < rect[2] and y > rect[1] and y < rect[3]:
+        #         isSomething = True
+        #         row.append(0)
+        # if not isSomething:
+        #     row.append(1)
     board.append(row)
 
 pprint.pprint(board)

@@ -125,15 +125,15 @@ def crop(input):
 
     # Define 4 points for the crop
     # Top left
-    distort_x1 = 6
-    distort_x2 = 8
-    distort_y1 = 0
-    distort_y2 = 5
+    distort_x1 = 12
+    distort_x2 = 12
+    distort_y1 = -5
+    distort_y2 = -5
 
-    x1 = 140
-    x2 = 540
-    y1 = 40
-    y2 = 430
+    x1 = 290
+    x2 = 1080
+    y1 = 70
+    y2 = 860
 
     src_pts = np.array(
         [[x1+distort_x1, y1+distort_y1], [x2-distort_x2, y1+distort_y2],
@@ -200,7 +200,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     edges = cv.Canny(gray, 50, 100)
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                              minRadius=5, maxRadius=25, param2=15, minDist=20)
+                              minRadius=10, maxRadius=25, param2=20, minDist=30)
 
     # print(len(circles))
     # ensure at least some circles were found
