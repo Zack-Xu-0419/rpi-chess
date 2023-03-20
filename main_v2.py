@@ -329,3 +329,11 @@ def getMove():
     # move(z=50)
     # move(boardForward=True)
     # sleep(10)
+
+
+def DetectAndThink():
+    rundet()
+    print(board)
+    computerMove = getMove()
+    print(computerMove)
+    board.push(chess.Move.from_uci(computerMove))
