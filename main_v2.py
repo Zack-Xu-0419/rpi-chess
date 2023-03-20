@@ -158,7 +158,7 @@ def captureImage():
         camera.capture(rawCapture, format="bgr")
         output = rawCapture.array
         camera.close()
-    cv.imwrite("originalOut.jpg", output)
+    cv.imwrite("../originalOut.jpg", output)
 
 
 def getBoardState(output, edges=[0, 0, 0, 0]):
