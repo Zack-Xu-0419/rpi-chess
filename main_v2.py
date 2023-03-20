@@ -350,6 +350,6 @@ def getMove():
 
 def DetectAndThink():
     rundet()
-    print(board)
     computerMove = getMove()
+    print(board)
     print(computerMove)
