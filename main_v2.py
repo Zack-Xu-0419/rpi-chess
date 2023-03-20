@@ -322,6 +322,11 @@ def rundet():
 def getMove():
     fish.set_fen_position(board.fen())
     best_move = fish.get_best_move()
+    board.push(chess.Move.from_uci(best_move))
+    i = best_move[0:2]
+    j = best_move[2:]
+    print(i, j)
+
     return best_move
     # Track moves:
 
@@ -336,4 +341,3 @@ def DetectAndThink():
     print(board)
     computerMove = getMove()
     print(computerMove)
-    board.push(chess.Move.from_uci(computerMove))
