@@ -272,11 +272,11 @@ def getBoardDiff(input):
                 a.append(i)
                 a.append(j)
             # If originally ocuppied by a black piece, and then white, it must be the end
-            elif previousRes[i][j] == 2 and input[i][j] == 1:
+            if previousRes[i][j] == 2 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
             # If originally not occupied, and then white, it must be the end
-            elif previousRes[i][j] == 0 and input[i][j] == 1:
+            if previousRes[i][j] == 0 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
 
