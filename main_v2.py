@@ -323,9 +323,19 @@ def getMove():
     fish.set_fen_position(board.fen())
     best_move = fish.get_best_move()
     board.push(chess.Move.from_uci(best_move))
-    i = best_move[0:2]
-    j = best_move[2:]
-    print(i, j)
+    letter1 = best_move[0]
+    number1 = best_move[1]
+    letter2 = best_move[2]
+    number2 = best_move[3]
+    for i in letters:
+        if i == (letter1):
+            letter1 = i
+    for i in letters:
+        if i == (letter2):
+            letter2 = i
+
+    print(letter1, number1)
+    print(letter2, number2)
 
     return best_move
     # Track moves:
