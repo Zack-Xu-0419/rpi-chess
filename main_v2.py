@@ -336,6 +336,7 @@ def getMove():
 
     print(letter1, number1)
     previousRes[letter1][int(number1)] == 0
+    print(previousRes)
     print(letter2, number2)
     previousRes[letter2][int(number2)] == 2
 
