@@ -126,6 +126,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     if edges[0] != 0:
         output = output[edges[0]:edges[1], edges[2]:edges[3]]
     else:
+        # y1, y2, x1, x2
         output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
             detectedEdges[0][0]):int(detectedEdges[1][0])]
 

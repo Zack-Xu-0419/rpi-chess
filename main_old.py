@@ -119,16 +119,51 @@ def edge_det(output):
     return ffinal_res
 
 
+def crop(input):
+    # Read input image
+    img = input
+
+    # Define 4 points for the crop
+    # Top left
+    distort_x1 = 6
+    distort_x2 = 8
+    distort_y1 = 0
+    distort_y2 = 5
+
+    x1 = 140
+    x2 = 540
+    y1 = 40
+    y2 = 430
+
+    src_pts = np.array(
+        [[x1+distort_x1, y1+distort_y1], [x2-distort_x2, y1+distort_y2],
+         [x2+distort_x2, y2-distort_y1], [x1-distort_x1, y2-distort_y2]], dtype=np.float32)
+
+    # Define destination points for the transformation
+    dst_pts = np.array(
+        [[0, 0], [x2-x1, 0], [x2-x1, y2-y1], [0, y2-y1]], dtype=np.float32)
+
+    # Get the perspective transformation matrix
+    M = cv.getPerspectiveTransform(src_pts, dst_pts)
+
+    # Apply the perspective transformation to the input image
+    transformed_img = cv.warpPerspective(img, M, (x2-x1, y2-y1))
+
+    return transformed_img
+
+
 def getBoardState(output, edges=[0, 0, 0, 0]):
     global previousImg
     global previousRes
 
-    detectedEdges = edge_det(output=output)
-    if edges[0] != 0:
-        output = output[edges[0]:edges[1], edges[2]:edges[3]]
-    else:
-        output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
-            detectedEdges[0][0]):int(detectedEdges[1][0])]
+    output = crop(output)
+
+    # if edges[0] != 0:
+    #     output = output[edges[0]:edges[1], edges[2]:edges[3]]
+    # else:
+    #     detectedEdges = edge_det(output=output)
+    #     output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
+    #         detectedEdges[0][0]):int(detectedEdges[1][0])]
 
     hsv_img = cv.cvtColor(output, cv.COLOR_BGR2HSV)
 

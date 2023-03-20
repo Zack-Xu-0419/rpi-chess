@@ -82,17 +82,46 @@ def edge_det(output):
     return ffinal_res
 
 
-output = cv.imread('1.jpg')
+def crop(input):
+    # Read input image
+    img = input
+
+    # Define 4 points for the crop
+    # Top left
+    distort_x1 = 6
+    distort_x2 = 8
+    distort_y1 = 0
+    distort_y2 = 5
+
+    x1 = 140
+    x2 = 540
+    y1 = 40
+    y2 = 430
+
+    src_pts = np.array(
+        [[x1+distort_x1, y1+distort_y1], [x2-distort_x2, y1+distort_y2],
+         [x2+distort_x2, y2-distort_y1], [x1-distort_x1, y2-distort_y2]], dtype=np.float32)
+
+    # Define destination points for the transformation
+    dst_pts = np.array(
+        [[0, 0], [x2-x1, 0], [x2-x1, y2-y1], [0, y2-y1]], dtype=np.float32)
+
+    # Get the perspective transformation matrix
+    M = cv.getPerspectiveTransform(src_pts, dst_pts)
+
+    # Apply the perspective transformation to the input image
+    transformed_img = cv.warpPerspective(img, M, (x2-x1, y2-y1))
+
+    return transformed_img
+
+
+output = cv.imread('3.jpg')
 cv.imshow("Orig", output)
 
 # Crop image:
 # Detect the red dots
-detectedEdges = edge_det(output=output)
-print(detectedEdges)
-# output = output[int(detectedEdges[0][0]):int(detectedEdges[1]
-#                 [0]), int(detectedEdges[1][1]):int(detectedEdges[0][1])]
-output = output[int(detectedEdges[1][1]):int(detectedEdges[0][1]), int(
-    detectedEdges[0][0]):int(detectedEdges[1][0])]
+output = crop(output)
+
 
 cv.imshow("cropped", output)
 
@@ -135,8 +164,8 @@ if circles is not None:
 # Drawing the pixles to divide up the grid, development purposes only
 dify = int(len(output)/8)+2
 difx = int(len(output[0])/8)
-const = 10
-consty = +10
+const = 0
+consty = 0
 for i in range(8):
     for j in range(8):
         curr = gray[j * dify:(j+1) * dify, const+i *
