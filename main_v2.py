@@ -301,8 +301,8 @@ def rundet():
     if previousRes != []:
         difference = getBoardDiff(fromWhite)
         print(difference)
-        pieceFrom = [letters[(difference[0][1])], difference[0][0]+1]
-        pieceTo = [letters[(difference[1][1])], difference[1][0]+1]
+        pieceFrom = [letters[(difference[0][1])], difference[0][0]]
+        pieceTo = [letters[(difference[1][1])], difference[1][0]]
 
         finalCommand = ""
 
