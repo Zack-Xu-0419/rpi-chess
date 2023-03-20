@@ -237,38 +237,26 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
         for i in range(8):
             # Compare the Color of each square of previous image vs current:
             # print(len(previousImg))
-            try:
-                prev = previousImg[j * dify+consty:(j+1) * dify+consty,
-                                   const+i * difx:const+(i+1) * difx]
-                curr = gray_orig[j * dify+consty:(j+1) * dify+consty, const+i *
-                                 difx:const+(i+1) * difx]
-                dif = abs(np.mean(curr) - np.mean(prev))
-                if abs(dif > 1):
-                    print(f"{i}::::{j}")
-                    print([letters[-(i-8)-1], j+1])
-                    print(dif)
-                    bigDiff[dif] = (i, j)
-                # if abs(np.mean(curr) - np.mean(prev)) > 1:
-                #     # print(f"{i}::::{j}")
-                #     # print(dif)
-                #     bigDiff.append([i, j])
-                # elif abs(np.mean(curr) - np.mean(prev)) > 0.2 and j == 7 and i == 7:
-                #     # print(f"{i}::::{j}")
-                #     # print(dif)
-                #     bigDiff.append([i, j])
-            except:
-                pass
 
             rect = [const+i * difx, j * dify+consty, const+(i+1) * difx,
                     (j+1) * dify+consty]  # xMin, yMin, xMax, yMax
             # check if a center of a circle is in that range
             isSomething = False
             for (x, y, r) in circles:
+                # If there is no piece
                 if x > rect[0] and x < rect[2] and y > rect[1] and y < rect[3]:
                     isSomething = True
                     row.append(0)
             if not isSomething:
-                row.append(1)
+                # If there is something, detect if it is white or black
+                curr = gray_orig[j * dify + consty + dify/2-10: (j+1) * dify+consty - dify/2+10, const+i *
+                                 difx + difx/2-10:const+(i+1) * difx-difx/2+10]
+                avg = np.mean(curr)
+                print(avg)
+                if avg > 1:
+                    row.append(2)
+                else:
+                    row.append(1)
         board.append(row)
 
     sortedDiff = sorted(bigDiff, reverse=True)
