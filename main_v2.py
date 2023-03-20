@@ -14,7 +14,6 @@ from collections import OrderedDict
 IP = '0.0.0.0'
 cc = [120, 120, 0]
 previousRes = []
-previousImg = np.array([])
 
 board = chess.Board()
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
@@ -163,8 +162,6 @@ def captureImage():
 
 
 def getBoardState(output, edges=[0, 0, 0, 0]):
-    global previousImg
-    global previousRes
 
     output = crop(output)
 
@@ -253,34 +250,29 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                                  difx + difx/2-10):int(const+(i+1) * difx-difx/2+10)]
                 avg = np.mean(curr)
                 print(avg)
-                if avg > 50:
+                if avg < 50:
                     row.append(2)
                 else:
                     row.append(1)
         board.append(row)
 
-    sortedDiff = sorted(bigDiff, reverse=True)
-    final_res = [bigDiff[k] for k in sortedDiff[0:2]]
-
-    # After comparing, set the previmage to curr image
-    previousImg = gray_orig
-    print(final_res)
-    print("!!!!")
-
-    return board, final_res
+    return board
 
 
 def getBoardDiff(input):
     # Looks at which square turned from 1 to 0
-    r = []
+    a = []
+    b = []
     # pprint.pprint(previousRes)
     # pprint.pprint(input)
     for i in range(len(input)):
         for j in range(len(input[0])):
             if previousRes[i][j] == 1 and input[i][j] == 0:
-                r.append(i)
-                r.append(j)
-    return r
+                a.append([i, j])
+            elif previousRes[i][j] != 1 and input[i][j] == 1:
+                b.append([i, j])
+
+    return (a, b)
 
 
 def rundet():
@@ -291,8 +283,7 @@ def rundet():
         camera.capture(rawCapture, format="bgr")
         output = rawCapture.array
         camera.close()
-    detected = getBoardState(output, edges=[45*2, 436*2, 125*2, 539*2])
-    fromBlack = detected[0]
+    fromBlack = getBoardState(output)
 
     fromWhite = []
     pieceFrom = [-1, -1]
@@ -300,28 +291,12 @@ def rundet():
         fromWhite.append(i[::-1])
     pprint.pprint(fromWhite)
     if previousRes != []:
-        pieceFrom = getBoardDiff(fromWhite)
-        # print(pieceFrom.__str__() + "FROM")
-        print("ORIG INPUT")
-        print(pieceFrom)
-        pieceFrom = f"{letters[pieceFrom[1]]}{8-pieceFrom[0]}"
-        pieceTo = detected[1]
-        # convert the two different movement of piece to uci
-        pieceTo1 = [letters[-(pieceTo[0][0]-8)-1], pieceTo[0][1]+1]
-        print(-(pieceTo[0][0]-8)-1, pieceTo[0][1]+1)
-        pieceTo2 = [letters[-(pieceTo[1][0]-8)-1], pieceTo[1][1]+1]
-        print(-(pieceTo[1][0]-8)-1, pieceTo[1][1]+1)
-        # print(pieceTo1, pieceTo2)
-        pieceTo1 = f"{pieceTo1[0]}{pieceTo1[1]}"
-        pieceTo2 = f"{pieceTo2[0]}{pieceTo2[1]}"
+        difference = getBoardDiff(fromWhite)
+        print(difference)
 
         finalCommand = ""
 
         print("PIECETO?:")
-
-        print(pieceTo1)
-        print(pieceTo2)
-
         print("PIECEFROM:")
 
         print(pieceFrom)
