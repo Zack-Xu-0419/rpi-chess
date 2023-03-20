@@ -267,10 +267,16 @@ def getBoardDiff(input):
     # pprint.pprint(input)
     for i in range(len(input)):
         for j in range(len(input[0])):
+            # If previously occupied by a white piece, and then empty, it must be the start piece
             if previousRes[i][j] == 1 and input[i][j] == 0:
                 a.append(i)
                 a.append(j)
-            elif previousRes[i][j] != 1 and input[i][j] == 1:
+            # If originally ocuppied by a black piece, and then white, it must be the end
+            elif previousRes[i][j] == 2 and input[i][j] == 1:
+                b.append(i)
+                b.append(j)
+            # If originally not occupied, and then white, it must be the end
+            elif previousRes[i][j] == 0 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
 
