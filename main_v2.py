@@ -310,7 +310,7 @@ def rundet():
         print(pieceFrom)
         print("PIECETO?:")
         print(pieceTo)
-        finalCommand = f"{pieceFrom[0]+pieceFrom[1]}{pieceTo[0]+pieceTo[1]}"
+        finalCommand = f"{pieceFrom[0]}{pieceFrom[1]}{pieceTo[0]}{pieceTo[1]}"
 
         print(finalCommand)
         board.push(chess.Move.from_uci(finalCommand))
