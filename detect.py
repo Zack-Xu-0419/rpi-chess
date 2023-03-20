@@ -144,7 +144,7 @@ cv.imshow("edge", edges)
 
 
 circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                          minRadius=10, maxRadius=30, param2=15, minDist=25)
+                          minRadius=5, maxRadius=13, param2=15, minDist=25)
 
 
 # print(len(circles))
