@@ -309,6 +309,7 @@ def rundet():
     pprint.pprint(fromWhite)
     if previousRes != []:
         difference, is_castling = getBoardDiff(fromWhite)
+        print(is_castling)
         if not is_castling:
             pieceFrom = [letters[(difference[0][1])], 8-difference[0][0]]
             pieceTo = [letters[(difference[1][1])], 8-difference[1][0]]
