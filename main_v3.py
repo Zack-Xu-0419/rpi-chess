@@ -260,34 +260,39 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
 
 def getBoardDiff(input):
-    # Looks at which square turned from 1 to 0
     a = []
     b = []
     is_castling = False
-    # pprint.pprint(previousRes)
-    # pprint.pprint(input)
+
     for i in range(len(input)):
         for j in range(len(input[0])):
-            # If previously occupied by a white piece, and then empty, it must be the start piece
             if previousRes[i][j] == 1 and input[i][j] == 0:
                 a.append(i)
                 a.append(j)
-            # If originally occupied by a black piece, and then white, it must be the end
             if previousRes[i][j] == 2 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
-            # If originally not occupied, and then white, it must be the end
             if previousRes[i][j] == 0 and input[i][j] == 1:
                 b.append(i)
                 b.append(j)
 
-    if len(a) == 4 and len(b) == 4:
-        if a == [7, 4, 7, 7] and b == [7, 6, 7, 5]:
-            is_castling = True
-            return ("e1g1", is_castling)  # white kingside castling
-        elif a == [7, 4, 7, 0] and b == [7, 2, 7, 3]:
-            is_castling = True
-            return ("e1c1", is_castling)  # white queenside castling
+    a_groups = [a[i:i+2] for i in range(0, len(a), 2)]
+    b_groups = [b[i:i+2] for i in range(0, len(b), 2)]
+
+    if len(a_groups) == 2 and len(b_groups) == 2:
+        king_from = []
+        king_to = []
+
+        if [7, 4] in a_groups:
+            king_from = [7, 4]
+            if [7, 6] in b_groups:
+                king_to = [7, 6]
+                is_castling = True
+                return ("e1g1", is_castling)  # white kingside castling
+            elif [7, 2] in b_groups:
+                king_to = [7, 2]
+                is_castling = True
+                return ("e1c1", is_castling)  # white queenside castling
 
     return ((a, b), is_castling)
 
