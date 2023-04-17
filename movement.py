@@ -7,7 +7,7 @@ headers = {
 }
 
 
-def move(x=0, y=0, z=10, calibrate=False, home=False speed=3000):
+def move(x=0, y=0, z=10, calibrate=False, home=False, speed=3000):
     json_data = {
         'command': f'G0 X{x} Y{y} Z{z} F1{speed}',
     }
