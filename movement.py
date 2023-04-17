@@ -7,18 +7,22 @@ headers = {
 }
 
 
-def move(x=0, y=0, z=10, home=False, speed=3000):
+def move(x=0, y=0, z=10, calibrate=False, home=False speed=3000):
     json_data = {
         'command': f'G0 X{x} Y{y} Z{z} F1{speed}',
     }
-    if home:
+    if calibrate:
         json_data = {
             'command': f'G28'
+        }
+    elif home:
+        json_data = {
+            'command': f'G0 X{0} Y{240} Z{50} F1{3000}',
         }
     print(requests.post(
         'http://10.1.25.244/api/printer/command', headers=headers, json=json_data))
 
 
-move(home=True)
+move(calibrate=True)
 sleep(10)
-move(y=240, z=50)
+move(home=True)
