@@ -124,29 +124,32 @@ def crop(input):
 
     # Define 4 points for the crop
     # Top left
-    distort_x1 = 12
-    distort_x2 = 12
-    distort_y1 = -5
-    distort_y2 = -5
-
-    x1 = 290
-    x2 = 1080
-    y1 = 70
-    y2 = 860
+    x1, y1 = 283, 49
+    # Top right
+    x2, y2 = 1091, 49
+    # Bottom left
+    x3, y3 = 265, 873
+    # Bottom right
+    x4, y4 = 1107, 865
 
     src_pts = np.array(
-        [[x1+distort_x1, y1+distort_y1], [x2-distort_x2, y1+distort_y2],
-         [x2+distort_x2, y2-distort_y1], [x1-distort_x1, y2-distort_y2]], dtype=np.float32)
+        [[x1, y1], [x2, y2], [x4, y4], [x3, y3]], dtype=np.float32)
+
+    # Calculate the dimensions of the output image
+    width = max(int(np.sqrt((x2-x1)**2 + (y2-y1)**2)),
+                int(np.sqrt((x4-x3)**2 + (y4-y3)**2)))
+    height = max(int(np.sqrt((x3-x1)**2 + (y3-y1)**2)),
+                 int(np.sqrt((x4-x2)**2 + (y4-y2)**2)))
 
     # Define destination points for the transformation
     dst_pts = np.array(
-        [[0, 0], [x2-x1, 0], [x2-x1, y2-y1], [0, y2-y1]], dtype=np.float32)
+        [[0, 0], [width-1, 0], [width-1, height-1], [0, height-1]], dtype=np.float32)
 
     # Get the perspective transformation matrix
     M = cv.getPerspectiveTransform(src_pts, dst_pts)
 
     # Apply the perspective transformation to the input image
-    transformed_img = cv.warpPerspective(img, M, (x2-x1, y2-y1))
+    transformed_img = cv.warpPerspective(img, M, (width, height))
 
     return transformed_img
 
