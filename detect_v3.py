@@ -124,7 +124,7 @@ def crop(input):
 
     # Define 4 points for the crop
     # Top left
-    x1, y1 = 283, 49
+    x1, y1 = 503, 49
     # Top right
     x2, y2 = 1091, 49
     # Bottom left
