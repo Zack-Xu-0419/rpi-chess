@@ -18,7 +18,9 @@ def set_servo_angle(angle):
 try:
     while True:
         set_servo_angle(0)  # Move servo to 0 degrees
+        time.sleep(5)
         set_servo_angle(90)  # Move servo to 90 degrees
+        time.sleep(5)
         set_servo_angle(180)  # Move servo to 180 degrees
 finally:
     pwm.stop()
