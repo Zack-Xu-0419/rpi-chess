@@ -5,7 +5,7 @@ servo_pin = 13  # Use pin 13 for the servo motor
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo_pin, GPIO.OUT)
 
-pwm = GPIO.PWM(servo_pin, 240)  # Set the PWM frequency to 50 Hz
+pwm = GPIO.PWM(servo_pin, 50)  # Set the PWM frequency to 50 Hz
 pwm.start(0)
 
 
