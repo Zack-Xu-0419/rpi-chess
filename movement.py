@@ -24,6 +24,10 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         json_data = {
             'command': f'G0 X{0} Y{240} Z{50} F1{3000}'
         }
+        # Update the last sent position
+        last_position['x'] = 0
+        last_position['y'] = 240
+        last_position['z'] = 50
     else:
         # Use the last sent position for unspecified axes
         x = last_position['x'] if x is None else x
