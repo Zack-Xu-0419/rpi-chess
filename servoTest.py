@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo_pin, GPIO.OUT)
 
 pwm = GPIO.PWM(servo_pin, 50)  # Set PWM frequency to 50Hz
-pwm.start(100)
+pwm.start(1000)
 
 
 def set_servo_angle(angle):
