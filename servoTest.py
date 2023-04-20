@@ -17,9 +17,9 @@ def set_angle(angle):
 
 set_angle(0)   # Set the servo to the initial position (0 degrees)
 time.sleep(2)  # Wait for 2 seconds
-set_angle(90)  # Set the servo to 90 degrees
+set_angle(80)  # Set the servo to 90 degrees
 time.sleep(2)  # Wait for 2 seconds
-set_angle(180)  # Set the servo to 180 degrees
+set_angle(80)  # Set the servo to 180 degrees
 
 pwm.stop()
 GPIO.cleanup()
