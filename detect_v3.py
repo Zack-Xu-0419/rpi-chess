@@ -118,6 +118,7 @@ def edge_det(output):
     return ffinal_res
 
 
+
 def crop(input):
     # Read input image
     img = input
@@ -152,6 +153,7 @@ def crop(input):
     transformed_img = cv.warpPerspective(img, M, (width, height))
 
     return transformed_img
+
 
 
 def captureImage():
