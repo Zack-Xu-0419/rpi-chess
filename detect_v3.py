@@ -143,10 +143,10 @@ def crop(img):
         [[0, 0], [width-1, 0], [width-1, height-1], [0, height-1]], dtype=np.float32)
 
     # Get the perspective transformation matrix
-    M = cv2.getPerspectiveTransform(src_pts, dst_pts)
+    M = cv.getPerspectiveTransform(src_pts, dst_pts)
 
     # Apply the perspective transformation to the input image
-    transformed_img = cv2.warpPerspective(img, M, (width, height))
+    transformed_img = cv.warpPerspective(img, M, (width, height))
 
     return transformed_img
 
