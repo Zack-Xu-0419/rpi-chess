@@ -118,20 +118,18 @@ def edge_det(output):
     return ffinal_res
 
 
-
 def crop(input):
     # Read input image
     img = input
 
     # Define 4 points for the crop using the new coordinates
-    # Top left
-    x1, y1 = 291, 56
+    x1, y1 = 290, 46
     # Top right
-    x2, y2 = 1083, 59
+    x2, y2 = 1089, 49
     # Bottom right
-    x3, y3 = 1110, 860
+    x3, y3 = 1119, 869
     # Bottom left
-    x4, y4 = 270, 862
+    x4, y4 = 272, 868
 
     src_pts = np.array(
         [[x1, y1], [x2, y2], [x3, y3], [x4, y4]], dtype=np.float32)
@@ -155,7 +153,6 @@ def crop(input):
     return transformed_img
 
 
-
 def captureImage():
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 960)
@@ -163,7 +160,7 @@ def captureImage():
         camera.capture(rawCapture, format="bgr")
         output = rawCapture.array
         camera.close()
-    cv.imwrite("../originalOut.jpg", output)
+    cv.imwrite("./originalOut.jpg", output)
 
 
 def getBoardState(output, edges=[0, 0, 0, 0]):
