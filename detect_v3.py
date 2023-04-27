@@ -118,19 +118,16 @@ def edge_det(output):
     return ffinal_res
 
 
-def crop(input):
-    # Read input image
-    img = input
-
+def crop(img):
     # Define 4 points for the crop
     # Top left
-    x1, y1 = 283, 49
+    x1, y1 = 291, 56
     # Top right
-    x2, y2 = 1000, 49
-    # Bottom left
-    x3, y3 = 265, 873
+    x2, y2 = 1083, 59
     # Bottom right
-    x4, y4 = 1000, 865
+    x3, y3 = 1110, 860
+    # Bottom left
+    x4, y4 = 270, 862
 
     src_pts = np.array(
         [[x1, y1], [x2, y2], [x4, y4], [x3, y3]], dtype=np.float32)
@@ -146,10 +143,10 @@ def crop(input):
         [[0, 0], [width-1, 0], [width-1, height-1], [0, height-1]], dtype=np.float32)
 
     # Get the perspective transformation matrix
-    M = cv.getPerspectiveTransform(src_pts, dst_pts)
+    M = cv2.getPerspectiveTransform(src_pts, dst_pts)
 
     # Apply the perspective transformation to the input image
-    transformed_img = cv.warpPerspective(img, M, (width, height))
+    transformed_img = cv2.warpPerspective(img, M, (width, height))
 
     return transformed_img
 
