@@ -118,8 +118,11 @@ def edge_det(output):
     return ffinal_res
 
 
-def crop(img):
-    # Define 4 points for the crop
+def crop(input):
+    # Read input image
+    img = input
+
+    # Define 4 points for the crop using the new coordinates
     # Top left
     x1, y1 = 291, 56
     # Top right
@@ -130,13 +133,13 @@ def crop(img):
     x4, y4 = 270, 862
 
     src_pts = np.array(
-        [[x1, y1], [x2, y2], [x4, y4], [x3, y3]], dtype=np.float32)
+        [[x1, y1], [x2, y2], [x3, y3], [x4, y4]], dtype=np.float32)
 
     # Calculate the dimensions of the output image
     width = max(int(np.sqrt((x2-x1)**2 + (y2-y1)**2)),
-                int(np.sqrt((x4-x3)**2 + (y4-y3)**2)))
-    height = max(int(np.sqrt((x3-x1)**2 + (y3-y1)**2)),
-                 int(np.sqrt((x4-x2)**2 + (y4-y2)**2)))
+                int(np.sqrt((x3-x4)**2 + (y3-y4)**2)))
+    height = max(int(np.sqrt((x4-x1)**2 + (y4-y1)**2)),
+                 int(np.sqrt((x3-x2)**2 + (y3-y2)**2)))
 
     # Define destination points for the transformation
     dst_pts = np.array(
