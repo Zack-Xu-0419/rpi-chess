@@ -123,13 +123,14 @@ def crop(input):
     img = input
 
     # Define 4 points for the crop using the new coordinates
-    x1, y1 = 290, 46
+    # Top left
+    x1, y1 = 231, 9
     # Top right
-    x2, y2 = 1089, 49
+    x2, y2 = 1026, 8
     # Bottom right
-    x3, y3 = 1119, 869
+    x3, y3 = 1031, 803
     # Bottom left
-    x4, y4 = 272, 868
+    x4, y4 = 210, 795
 
     src_pts = np.array(
         [[x1, y1], [x2, y2], [x3, y3], [x4, y4]], dtype=np.float32)
