@@ -61,7 +61,7 @@ def a_to_b(start_position, end_position):
     move(z=40)
     open()
     move(z=5)
-    sleep(10)
+    sleep(20)
     close()
     move(z=40)
 
