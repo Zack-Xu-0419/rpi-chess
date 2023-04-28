@@ -57,8 +57,8 @@ def open():
 
 def a_to_b(start_position, end_position):
     # Move the actuator to the start position and close the claw
-    move(z=5)
     actuator_start = goto(start_position)
+    move(z=5)
     close()
     move(z=40)
 
