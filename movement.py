@@ -1,3 +1,5 @@
+import time
+import RPi.GPIO as GPIO
 import requests
 from time import sleep
 
@@ -12,6 +14,33 @@ last_position = {
     'y': 0,
     'z': 10,
 }
+
+
+# Constants
+SERVO_PIN = 13  # GPIO18 (Pin 12)
+FREQUENCY = 50  # 50Hz frequency (20ms period)
+MIN_DUTY_CYCLE = 2.5
+MAX_DUTY_CYCLE = 12.5
+
+
+def setup():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(SERVO_PIN, GPIO.OUT)
+    pwm = GPIO.PWM(SERVO_PIN, FREQUENCY)
+    pwm.start(0)
+    return pwm
+
+
+def set_angle(pwm, angle):
+    duty_cycle = MIN_DUTY_CYCLE + \
+        (angle / 180.0) * (MAX_DUTY_CYCLE - MIN_DUTY_CYCLE)
+    pwm.ChangeDutyCycle(duty_cycle)
+    time.sleep(1)
+
+
+def cleanup(pwm):
+    pwm.stop()
+    GPIO.cleanup()
 
 
 def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
@@ -46,6 +75,10 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
     print(requests.post(
         'http://0.0.0.0/api/printer/command', headers=headers, json=json_data))
 
+
+if __name__ == "__main__":
+    pwm = setup()
+    cleanup(pwm)
 
 # move(calibrate=True)
 # sleep(10)
