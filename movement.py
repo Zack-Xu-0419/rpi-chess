@@ -21,9 +21,11 @@ SERVO_PIN = 13  # GPIO18 (Pin 12)
 FREQUENCY = 50  # 50Hz frequency (20ms period)
 MIN_DUTY_CYCLE = 2.5
 MAX_DUTY_CYCLE = 12.5
+pwm = None
 
 
 def setup():
+    global pwm
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(SERVO_PIN, GPIO.OUT)
     pwm = GPIO.PWM(SERVO_PIN, FREQUENCY)
@@ -41,6 +43,16 @@ def set_angle(pwm, angle):
 def cleanup(pwm):
     pwm.stop()
     GPIO.cleanup()
+
+
+def close():
+    global pwm
+    set_angle(pwm, 90)
+
+
+def open():
+    global pwm
+    set_angle(pwm, 80)
 
 
 def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
