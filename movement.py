@@ -22,7 +22,7 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         }
     elif home:
         json_data = {
-            'command': f'G0 X{0} Y{240} Z{70} F1{3000}'
+            'command': f'G0 X{0} Y{220} Z{70} F1{3000}'
         }
         # Update the last sent position
         last_position['x'] = 0
