@@ -55,6 +55,21 @@ def open():
     set_angle(pwm, 60)
 
 
+def a_to_b(start_position, end_position):
+    # Move the actuator to the start position and close the claw
+    move(z=5)
+    actuator_start = goto(start_position)
+    close()
+    move(z=40)
+
+    # Move the actuator to the end position
+    actuator_end = goto(end_position)
+
+    # Move the actuator down to z=5 and open the claw to drop the piece
+    move(z=5)
+    open()
+
+
 def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(203, 226)):
     x, y = ord(chess_coordinate[0].lower()) - \
         ord('a') + 1, int(chess_coordinate[1])
