@@ -72,6 +72,7 @@ def a_to_b(start_position, end_position):
     move(z=5)
     sleep(18)
     open()
+    move(home=True)
 
 
 def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)):
@@ -96,7 +97,7 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         }
     elif home:
         json_data = {
-            'command': f'G0 X{0} Y{220} Z{70} F1{3000}'
+            'command': f'G0 X{0} Y{220} Z{40} F1{3000}'
         }
         # Update the last sent position
         last_position['x'] = 0
