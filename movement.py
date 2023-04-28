@@ -60,6 +60,7 @@ def a_to_b(start_position, end_position):
     actuator_start = goto(start_position)
     move(z=5)
     close()
+    sleep(10)
     move(z=40)
 
     # Move the actuator to the end position
@@ -67,6 +68,7 @@ def a_to_b(start_position, end_position):
 
     # Move the actuator down to z=5 and open the claw to drop the piece
     move(z=5)
+    sleep(10)
     open()
 
 
@@ -122,4 +124,4 @@ if __name__ == "__main__":
 
 # move(calibrate=True)
 # sleep(10)
-move(home=True)
+# move(home=True)
