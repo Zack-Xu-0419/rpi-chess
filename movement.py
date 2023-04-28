@@ -78,7 +78,6 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
 
 if __name__ == "__main__":
     pwm = setup()
-    cleanup(pwm)
 
 # move(calibrate=True)
 # sleep(10)
