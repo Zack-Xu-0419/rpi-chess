@@ -55,7 +55,7 @@ def open():
     set_angle(pwm, 60)
 
 
-def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(205, 230)):
+def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(203, 226)):
     x, y = ord(chess_coordinate[0].lower()) - \
         ord('a') + 1, int(chess_coordinate[1])
 
