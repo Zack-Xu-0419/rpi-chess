@@ -47,12 +47,12 @@ def cleanup(pwm):
 
 def close():
     global pwm
-    set_angle(pwm, 100)
+    set_angle(pwm, 80)
 
 
 def open():
     global pwm
-    set_angle(pwm, 80)
+    set_angle(pwm, 60)
 
 
 def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
