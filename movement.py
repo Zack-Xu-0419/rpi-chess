@@ -58,6 +58,7 @@ def open():
 def a_to_b(start_position, end_position):
     # Move the actuator to the start position and close the claw
     actuator_start = goto(start_position)
+    move(z=40)
     open()
     move(z=5)
     sleep(10)
@@ -69,7 +70,7 @@ def a_to_b(start_position, end_position):
 
     # Move the actuator down to z=5 and open the claw to drop the piece
     move(z=5)
-    sleep(10)
+    sleep(18)
     open()
 
 
