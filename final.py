@@ -434,7 +434,7 @@ def cleanup(pwm):
 
 def close():
     global pwm
-    set_angle(pwm, 80)
+    set_angle(pwm, 85)
 
 
 def open():
@@ -443,7 +443,7 @@ def open():
 
 
 TOP_Z = 47
-BOTTOM_Z = 3
+BOTTOM_Z = 1
 SLEEP_BEFORE_CLOSE = 4
 SLEEP_AFTER_CLOSE = 4
 SLEEP_BEFORE_OPEN = 5
