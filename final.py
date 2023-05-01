@@ -328,6 +328,7 @@ def getBoardDiff(input):
 
 def rundet():
     global previousRes
+    global previousBoard
     with picamera.PiCamera() as camera:
         camera.resolution = (1280, 960)
         rawCapture = PiRGBArray(camera)
