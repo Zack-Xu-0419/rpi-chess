@@ -467,10 +467,10 @@ def a_to_b(start_position, end_position):
         move(z=BOTTOM_Z)
         sleep(10)
         close()
-        sleep(SLEEP_BEFORE_CLOSE)
         move(z=TOP_Z)
         sleep(SLEEP_AFTER_CLOSE)
         move(x=240)
+        sleep(2)
         open()
 
     # Move the actuator to the start position and close the claw
