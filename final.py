@@ -464,9 +464,9 @@ def a_to_b(start_position, end_position):
     # If the end position is occupied, move the piece off the occupied square
     if is_occupied:
         goto(end_position)
-        sleep(2)
-        close()
         move(z=BOTTOM_Z)
+        sleep(8)
+        close()
         sleep(SLEEP_BEFORE_CLOSE)
         move(z=TOP_Z)
         sleep(SLEEP_AFTER_CLOSE)
