@@ -438,25 +438,51 @@ def open():
     set_angle(pwm, 60)
 
 
+TOP_Z = 40
+BOTTOM_Z = 5
+SLEEP_BEFORE_CLOSE = 15
+SLEEP_AFTER_CLOSE = 15
+SLEEP_BEFORE_OPEN = 18
+SLEEP_AT_END = 8
+
+
 def a_to_b(start_position, end_position):
+    start_square = chess.SQUARE_NAMES.index(start_position)
+    end_square = chess.SQUARE_NAMES.index(end_position)
+
+    # Check if the end position is occupied
+    is_occupied = board.piece_at(end_square) is not None
+
+    move(z=TOP_Z)
+
+    # If the end position is occupied, move the piece off the occupied square
+    if is_occupied:
+        goto(end_position)
+        sleep(2)
+        move(z=BOTTOM_Z)
+        sleep(SLEEP_BEFORE_CLOSE)
+        move(z=TOP_Z)
+        sleep(SLEEP_AFTER_CLOSE)
+        move(x=240)
+        open()
+
     # Move the actuator to the start position and close the claw
     actuator_start = goto(start_position)
-    move(z=40)
     open()
-    move(z=5)
-    sleep(20)
+    move(z=BOTTOM_Z)
+    sleep(SLEEP_BEFORE_CLOSE)
     close()
-    move(z=40)
+    move(z=TOP_Z)
 
     # Move the actuator to the end position
     actuator_end = goto(end_position)
 
-    # Move the actuator down to z=5 and open the claw to drop the piece
-    move(z=5)
-    sleep(18)
+    # Move the actuator down to z=BOTTOM_Z and open the claw to drop the piece
+    move(z=BOTTOM_Z)
+    sleep(SLEEP_BEFORE_OPEN)
     open()
-    move(z=20)
-    sleep(5)
+    move(z=TOP_Z)
+    sleep(SLEEP_AT_END)
     move(home=True)
 
 
