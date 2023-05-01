@@ -439,7 +439,7 @@ def open():
 
 
 TOP_Z = 40
-BOTTOM_Z = 5
+BOTTOM_Z = 3
 SLEEP_BEFORE_CLOSE = 15
 SLEEP_AFTER_CLOSE = 15
 SLEEP_BEFORE_OPEN = 18
@@ -452,6 +452,8 @@ def a_to_b(start_position, end_position):
 
     # Check if the end position is occupied
     is_occupied = board.piece_at(end_square) is not None
+    print(is_occupied)
+    print(board.piece_at(end_square))
 
     move(z=TOP_Z)
 
