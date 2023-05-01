@@ -434,7 +434,7 @@ def cleanup(pwm):
 
 def close():
     global pwm
-    set_angle(pwm, 85)
+    set_angle(pwm, 75)
 
 
 def open():
