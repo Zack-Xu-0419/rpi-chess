@@ -39,6 +39,8 @@ IP = '0.0.0.0'
 cc = [120, 120, 0]
 previousRes = []
 
+previousBoard = chess.Board()
+
 board = chess.Board()
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 fish = stockfish.Stockfish("../../Stockfish-sf_15/src/stockfish")
@@ -357,6 +359,7 @@ def rundet():
             finalCommand = difference  # castling move
 
         print(finalCommand)
+        previousBoard = board.copy()
         board.push(chess.Move.from_uci(finalCommand))
 
     previousRes = fromWhite
@@ -451,9 +454,9 @@ def a_to_b(start_position, end_position):
     end_square = chess.SQUARE_NAMES.index(end_position)
 
     # Check if the end position is occupied
-    is_occupied = board.piece_at(end_square) is not None
+    is_occupied = previousBoard.piece_at(end_square) is not None
     print(is_occupied)
-    print(board.piece_at(end_square))
+    print(previousBoard.piece_at(end_square))
 
     move(z=TOP_Z)
 
@@ -461,6 +464,7 @@ def a_to_b(start_position, end_position):
     if is_occupied:
         goto(end_position)
         sleep(2)
+        close()
         move(z=BOTTOM_Z)
         sleep(SLEEP_BEFORE_CLOSE)
         move(z=TOP_Z)
