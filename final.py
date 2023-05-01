@@ -442,7 +442,7 @@ def open():
     set_angle(pwm, 40)
 
 
-TOP_Z = 45
+TOP_Z = 47
 BOTTOM_Z = 3
 SLEEP_BEFORE_CLOSE = 12
 SLEEP_AFTER_CLOSE = 15
@@ -465,7 +465,7 @@ def a_to_b(start_position, end_position):
     if is_occupied:
         goto(end_position)
         move(z=BOTTOM_Z)
-        sleep(10)
+        sleep(SLEEP_BEFORE_CLOSE)
         close()
         move(z=TOP_Z)
         sleep(SLEEP_AFTER_CLOSE)
