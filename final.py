@@ -439,7 +439,7 @@ def close():
 
 def open():
     global pwm
-    set_angle(pwm, 60)
+    set_angle(pwm, 55)
 
 
 TOP_Z = 47
