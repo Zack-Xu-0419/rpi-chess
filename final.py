@@ -465,7 +465,7 @@ def a_to_b(start_position, end_position):
     if is_occupied:
         goto(end_position)
         move(z=BOTTOM_Z)
-        sleep(8)
+        sleep(10)
         close()
         sleep(SLEEP_BEFORE_CLOSE)
         move(z=TOP_Z)
