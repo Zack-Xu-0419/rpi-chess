@@ -531,6 +531,14 @@ def det_think_move():
     a_to_b(move[:2], move[2:])
 
 
+def setSpeed():
+    json_data = {
+        'command': "M203 Z 10000"
+    }
+    requests.post(
+        'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
+
+
 if __name__ == "__main__":
     pwm = setup()
 
