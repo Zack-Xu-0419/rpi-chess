@@ -22,8 +22,8 @@ headers = {
 # Add a dictionary to store the last position
 last_position = {
     'x': 0,
-    'y': 0,
-    'z': 10,
+    'y': 220,
+    'z': 40,
 }
 
 
@@ -425,7 +425,7 @@ def open():
 TOP_Z = 47
 BOTTOM_Z = 1
 SLEEP_BEFORE_CLOSE = 2
-SLEEP_AFTER_CLOSE = 2
+SLEEP_AFTER_CLOSE = 2.3
 SLEEP_BEFORE_OPEN = 4
 SLEEP_AT_END = 2
 
