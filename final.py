@@ -496,7 +496,7 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
     elif home:
 
         json_data = {
-            'command': f'G0 Z{40} F1{3000}'
+            'command': f'G0 Z{TOP_Z} F1{3000}'
         }
 
         requests.post(
@@ -505,12 +505,12 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         sleep(3)
 
         json_data = {
-            'command': f'G0 X{0} Y{220} Z{40} F1{3000}'
+            'command': f'G0 X{0} Y{220} Z{TOP_Z} F1{3000}'
         }
         # Update the last sent position
         last_position['x'] = 0
         last_position['y'] = 240
-        last_position['z'] = 70
+        last_position['z'] = TOP_Z
         requests.post(
             'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
