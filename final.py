@@ -34,6 +34,9 @@ MIN_DUTY_CYCLE = 2.5
 MAX_DUTY_CYCLE = 12.5
 pwm = None
 
+OFFSET_X = 0
+OFFSET_Y = 2
+
 # Constants
 IP = '0.0.0.0'
 cc = [120, 120, 0]
@@ -500,8 +503,8 @@ def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)
     x_range = board_top_right[0] - board_bottom_left[0]
     y_range = board_top_right[1] - board_bottom_left[1]
 
-    actuator_x = board_bottom_left[0] + (x - 1) * x_range / 7
-    actuator_y = board_bottom_left[1] + (y - 1) * y_range / 7
+    actuator_x = board_bottom_left[0] + (x - 1) * x_range / 7 + OFFSET_X
+    actuator_y = board_bottom_left[1] + (y - 1) * y_range / 7 + OFFSET_Y
 
     move(actuator_x, actuator_y)
     return (actuator_x, actuator_y)
