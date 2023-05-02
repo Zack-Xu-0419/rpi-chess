@@ -502,7 +502,7 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         requests.post(
             'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
-        sleep(3)
+        sleep(0.6)
 
         json_data = {
             'command': f'G0 X{0} Y{220} Z{TOP_Z} F1{3000}'
