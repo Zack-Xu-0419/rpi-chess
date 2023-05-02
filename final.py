@@ -338,8 +338,8 @@ def rundet():
             finalCommand = difference  # castling move
 
         print(finalCommand)
-        previousBoard = board.copy()
         board.push(chess.Move.from_uci(finalCommand))
+        previousBoard = board.copy()
 
     previousRes = fromWhite
     print(board)
