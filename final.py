@@ -541,6 +541,7 @@ def setSpeed():
 
 if __name__ == "__main__":
     pwm = setup()
+    setSpeed()
 
 # move(calibrate=True)
 # sleep(10)
