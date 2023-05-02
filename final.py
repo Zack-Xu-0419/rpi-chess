@@ -544,7 +544,9 @@ def setSpeed():
 def blitz():
     while True:
         det_think_move()
-        time.sleep(20)
+        for i in range(20):
+            sleep(1)
+            print(i)
 
 
 if __name__ == "__main__":
