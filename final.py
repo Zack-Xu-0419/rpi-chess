@@ -56,31 +56,6 @@ headers = {
 }
 
 
-def move(x=0, y=0, z=10, home=False, speed=3000, boardForward=False):
-    if x > 240 or x < 0:
-        return 0
-
-    if y > 240 or y < 0:
-        return 0
-
-    if z > 50 or z < 0:
-        return 0
-
-    json_data = {
-        'command': f'G0 X{x} Y{y} Z{z} F1{speed}',
-    }
-    if home:
-        json_data = {
-            'command': f'G28'
-        }
-    if boardForward:
-        json_data = {
-            'command': f'G0 X0 Y240'
-        }
-    print(requests.post(
-        f'http://{IP}/api/printer/command', headers=headers, json=json_data))
-
-
 def edge_det(output):
     final_res = []
     # with picamera.PiCamera() as camera:
@@ -524,6 +499,14 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         last_position['x'] = 0
         last_position['y'] = 240
         last_position['z'] = 70
+        requests.post(
+            'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
+
+        sleep(3)
+        json_data = {
+            'command': f'G0 Z{40} F1{3000}'
+        }
+
     else:
         # Use the last sent position for unspecified axes
         x = last_position['x'] if x is None else x
