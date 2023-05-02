@@ -541,6 +541,12 @@ def setSpeed():
         'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
 
+def blitz():
+    while True:
+        det_think_move()
+        time.sleep(20)
+
+
 if __name__ == "__main__":
     pwm = setup()
     setSpeed()
