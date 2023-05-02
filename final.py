@@ -379,6 +379,8 @@ def DetectAndThink():
     rundet()
     computerMove = getMove()
     print(board)
+    print("PREVIOUS:")
+    print(previousBoard)
     print(computerMove)
     return computerMove
 
@@ -422,10 +424,10 @@ def open():
 
 TOP_Z = 47
 BOTTOM_Z = 1
-SLEEP_BEFORE_CLOSE = 4
-SLEEP_AFTER_CLOSE = 4
-SLEEP_BEFORE_OPEN = 5
-SLEEP_AT_END = 3
+SLEEP_BEFORE_CLOSE = 3
+SLEEP_AFTER_CLOSE = 3
+SLEEP_BEFORE_OPEN = 3
+SLEEP_AT_END = 2
 
 
 def a_to_b(start_position, end_position):
