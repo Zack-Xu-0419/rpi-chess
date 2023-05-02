@@ -257,7 +257,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                                  difx + difx/2-10):int(const+(i+1) * difx-difx/2+10)]
                 avg = np.mean(curr)
                 print(avg)
-                if avg < 120:
+                if avg < 150:
                     row.append(2)
                 else:
                     row.append(1)
