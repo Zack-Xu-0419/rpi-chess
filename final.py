@@ -470,6 +470,12 @@ def a_to_b(start_position, end_position):
     open()
     move(home=True)
 
+    # Handle castling moves
+    if start_position == "e8" and end_position == "c8":
+        a_to_b("a8", "d8")
+    elif start_position == "e8" and end_position == "g8":
+        a_to_b("h8", "f8")
+
 
 def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)):
     x, y = ord(chess_coordinate[0].lower()) - \
