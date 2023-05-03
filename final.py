@@ -48,6 +48,12 @@ board = chess.Board()
 letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 fish = stockfish.Stockfish("../../Stockfish-sf_15/src/stockfish")
 
+# Set skill level (0 to 20)
+stockfish.set_skill_level(5)
+
+# Set contempt value (positive for aggressive play, negative for defensive play)
+stockfish.set_contempt(20)
+
 
 # Movement Functions
 headers = {
