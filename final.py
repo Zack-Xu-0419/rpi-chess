@@ -473,7 +473,7 @@ def a_to_b(start_position, end_position, addDelay=0):
     # Handle castling moves
     if start_position == "e8" and end_position == "c8":
         a_to_b("a8", "d8", addDelay=5)
-    elif start_position == "e8" and end_position == "g8":
+    elif start_position == "e8" and end_position == "h8":
         a_to_b("h8", "f8", addDelay=5)
 
 
