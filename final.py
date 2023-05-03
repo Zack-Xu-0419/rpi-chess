@@ -468,8 +468,6 @@ def a_to_b(start_position, end_position):
     move(z=BOTTOM_Z)
     sleep(SLEEP_BEFORE_OPEN)
     open()
-    move(z=TOP_Z)
-    sleep(SLEEP_AT_END)
     move(home=True)
 
 
