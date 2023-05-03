@@ -348,7 +348,7 @@ def rundet():
 def getMove():
     fish.set_fen_position(board.fen())
     best_move = fish.get_best_move()
-    print("EVAL:" + fish.get_evaluation()['cp']/100)
+    print("EVAL:" + fish.get_evaluation()['value']/100)
     board.push(chess.Move.from_uci(best_move))
     letter1 = best_move[0]
     number1 = best_move[1]
