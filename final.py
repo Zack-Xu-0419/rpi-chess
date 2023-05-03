@@ -52,7 +52,7 @@ fish = stockfish.Stockfish("../../Stockfish-sf_15/src/stockfish")
 fish.set_skill_level(5)
 
 # Set contempt value (positive for aggressive play, negative for defensive play)
-fish.set_contempt(20)
+fish.update_engine_parameters({'Contempt': 20})
 
 
 # Movement Functions
