@@ -549,7 +549,7 @@ def setSpeed():
 def blitz():
     while True:
         det_think_move()
-        for i in range(21):
+        for i in range(6):
             sleep(1)
             print(20 - i - 1)
 
