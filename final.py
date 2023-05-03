@@ -431,6 +431,7 @@ SLEEP_AT_END = 2
 
 
 def a_to_b(start_position, end_position, addDelay=0):
+    time.sleep(addDelay)
     start_square = chess.SQUARE_NAMES.index(start_position)
     end_square = chess.SQUARE_NAMES.index(end_position)
 
