@@ -430,7 +430,7 @@ SLEEP_BEFORE_OPEN = 4.2
 SLEEP_AT_END = 2
 
 
-def a_to_b(start_position, end_position):
+def a_to_b(start_position, end_position, addDelay=0):
     start_square = chess.SQUARE_NAMES.index(start_position)
     end_square = chess.SQUARE_NAMES.index(end_position)
 
@@ -445,7 +445,7 @@ def a_to_b(start_position, end_position):
     if is_occupied:
         goto(end_position)
         move(z=BOTTOM_Z)
-        sleep(SLEEP_BEFORE_CLOSE)
+        sleep(SLEEP_BEFORE_CLOSE + addDelay)
         close()
         move(z=TOP_Z)
         sleep(SLEEP_AFTER_CLOSE)
@@ -472,9 +472,9 @@ def a_to_b(start_position, end_position):
 
     # Handle castling moves
     if start_position == "e8" and end_position == "c8":
-        a_to_b("a8", "d8")
+        a_to_b("a8", "d8", addDelay=5)
     elif start_position == "e8" and end_position == "g8":
-        a_to_b("h8", "f8")
+        a_to_b("h8", "f8", addDelay=5)
 
 
 def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)):
