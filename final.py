@@ -458,11 +458,11 @@ def a_to_b(start_position, end_position, addDelay=0):
     max_distance = sqrt(8 ** 2 + 8 ** 2)
     distance_factor = distance / max_distance
 
-    sleep_before_close = MIN_SLEEP_BEFORE_CLOSE + \
+    SLEEP_BEFORE_CLOSE = MIN_SLEEP_BEFORE_CLOSE + \
         (MAX_SLEEP_BEFORE_CLOSE - MIN_SLEEP_BEFORE_CLOSE) * distance_factor
-    sleep_after_close = MIN_SLEEP_AFTER_CLOSE + \
+    SLEEP_AFTER_CLOSE = MIN_SLEEP_AFTER_CLOSE + \
         (MAX_SLEEP_AFTER_CLOSE - MIN_SLEEP_AFTER_CLOSE) * distance_factor
-    sleep_before_open = MIN_SLEEP_BEFORE_OPEN + \
+    SLEEP_BEFORE_CLOSE = MIN_SLEEP_BEFORE_OPEN + \
         (MAX_SLEEP_BEFORE_OPEN - MIN_SLEEP_BEFORE_OPEN) * distance_factor
 
     time.sleep(addDelay)
