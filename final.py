@@ -13,6 +13,7 @@ import time
 import RPi.GPIO as GPIO
 import requests
 from time import sleep
+import threading
 
 headers = {
     'Content-type': 'application/json',
@@ -571,18 +572,13 @@ def button_callback():
 GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
                       callback=button_callback, bouncetime=300)
 
-try:
+
+def button_monitor():
     while True:
-        time.sleep(1)
-except KeyboardInterrupt:
-    GPIO.cleanup()
-
-
-def quit():
-    move(home=True)
-    cleanup(pwm)
-    GPIO.cleanup()
-    exit(0)
+        if GPIO.input(BUTTON_PIN) == 0:  # Change to '1' if using a pull-down resistor
+            print("Button pressed!")
+            # Add a debounce delay to avoid multiple detections
+            time.sleep(0.3)
 
 
 def blitz():
@@ -596,6 +592,8 @@ def blitz():
 if __name__ == "__main__":
     pwm = setup()
     setSpeed()
+    button_thread = threading.Thread(target=button_monitor)
+    button_thread.start()
 
 # move(calibrate=True)
 # sleep(10)
