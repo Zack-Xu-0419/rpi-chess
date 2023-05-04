@@ -14,7 +14,6 @@ import RPi.GPIO as GPIO
 import requests
 from time import sleep
 import threading
-from math import sqrt
 
 headers = {
     'Content-type': 'application/json',
@@ -433,62 +432,25 @@ def open():
 
 TOP_Z = 50
 BOTTOM_Z = 7
-MIN_SLEEP_BEFORE_CLOSE = 2
-MIN_SLEEP_AFTER_CLOSE = 2
-MIN_SLEEP_BEFORE_OPEN = 4
-
-MAX_SLEEP_BEFORE_CLOSE = 4
-MAX_SLEEP_AFTER_CLOSE = 2
-MAX_SLEEP_BEFORE_OPEN = 4
+SLEEP_BEFORE_CLOSE = 2
+SLEEP_AFTER_CLOSE = 2
+SLEEP_BEFORE_OPEN = 4
 SLEEP_AT_END = 2
 
 
-def a_to_b(start_position, end_position, addDelay=0):
-    time.sleep(addDelay)
-    start_square = chess.SQUARE_NAMES.index(start_position)
-    end_square = chess.SQUARE_NAMES.index(end_position)
-
-    # Calculate Euclidean distance between start and end positions
-    start_file, start_rank = divmod(start_square, 8)
-    end_file, end_rank = divmod(end_square, 8)
-    distance = sqrt((start_file - end_file) ** 2 +
-                    (start_rank - end_rank) ** 2)
-
-    # Calculate proportional delay based on distance and min/max wait times
-    max_distance = sqrt(8 ** 2 + 8 ** 2)
-    distance_factor = distance / max_distance
-
-    SLEEP_BEFORE_CLOSE = MIN_SLEEP_BEFORE_CLOSE + \
-        (MAX_SLEEP_BEFORE_CLOSE - MIN_SLEEP_BEFORE_CLOSE) * distance_factor
-    SLEEP_AFTER_CLOSE = MIN_SLEEP_AFTER_CLOSE + \
-        (MAX_SLEEP_AFTER_CLOSE - MIN_SLEEP_AFTER_CLOSE) * distance_factor
-    SLEEP_BEFORE_CLOSE = MIN_SLEEP_BEFORE_OPEN + \
-        (MAX_SLEEP_BEFORE_OPEN - MIN_SLEEP_BEFORE_OPEN) * distance_factor
-
-    time.sleep(addDelay)
-    start_square = chess.SQUARE_NAMES.index(start_position)
-    end_square = chess.SQUARE_NAMES.index(end_position)
-
-    # Check if the end position is occupied
-    is_occupied = previousBoard.piece_at(end_square) is not None
-    print(is_occupied)
-    print(previousBoard.piece_at(end_square))
-
+def move_piece_off(end_position, addDelay):
+    goto(end_position)
+    move(z=BOTTOM_Z)
+    sleep(SLEEP_BEFORE_CLOSE + addDelay)
+    close()
     move(z=TOP_Z)
+    sleep(SLEEP_AFTER_CLOSE)
+    move(x=240)
+    sleep(2)
+    open()
 
-    # If the end position is occupied, move the piece off the occupied square
-    if is_occupied:
-        goto(end_position)
-        move(z=BOTTOM_Z)
-        sleep(SLEEP_BEFORE_CLOSE + addDelay)
-        close()
-        move(z=TOP_Z)
-        sleep(SLEEP_AFTER_CLOSE)
-        move(x=240)
-        sleep(2)
-        open()
 
-    # Move the actuator to the start position and close the claw
+def grab_piece(start_position):
     actuator_start = goto(start_position)
     open()
     move(z=BOTTOM_Z)
@@ -496,34 +458,41 @@ def a_to_b(start_position, end_position, addDelay=0):
     close()
     move(z=TOP_Z)
 
-    # Move the actuator to the end position
-    actuator_end = goto(end_position)
 
-    # Move the actuator down to z=BOTTOM_Z and open the claw to drop the piece
+def drop_piece(end_position):
+    actuator_end = goto(end_position)
     move(z=BOTTOM_Z)
-    sleep(SLEEP_AT_END)
+    sleep(SLEEP_BEFORE_OPEN)
     open()
     move(home=True)
 
-    # Handle castling moves
+
+def handle_castling(start_position, end_position):
     if start_position == "e8" and end_position == "c8":
         a_to_b("a8", "d8", addDelay=5)
     elif start_position == "e8" and end_position == "g8":
         a_to_b("h8", "f8", addDelay=5)
 
 
-def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)):
-    x, y = ord(chess_coordinate[0].lower()) - \
-        ord('a') + 1, int(chess_coordinate[1])
+def a_to_b(start_position, end_position, addDelay=0):
+    time.sleep(addDelay)
+    start_square = chess.SQUARE_NAMES.index(start_position)
+    end_square = chess.SQUARE_NAMES.index(end_position)
 
-    x_range = board_top_right[0] - board_bottom_left[0]
-    y_range = board_top_right[1] - board_bottom_left[1]
+    is_occupied = previousBoard.piece_at(end_square) is not None
+    print(is_occupied)
+    print(previousBoard.piece_at(end_square))
 
-    actuator_x = board_bottom_left[0] + (x - 1) * x_range / 7 + OFFSET_X
-    actuator_y = board_bottom_left[1] + (y - 1) * y_range / 7 + OFFSET_Y
+    move(z=TOP_Z)
 
-    move(actuator_x, actuator_y)
-    return (actuator_x, actuator_y)
+    if is_occupied:
+        move_piece_off(end_position, addDelay)
+
+    grab_piece(start_position)
+
+    drop_piece(end_position)
+
+    handle_castling(start_position, end_position)
 
 
 def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
