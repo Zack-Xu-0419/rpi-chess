@@ -430,8 +430,8 @@ def open():
     set_angle(pwm, 55)
 
 
-TOP_Z = 47
-BOTTOM_Z = 5
+TOP_Z = 50
+BOTTOM_Z = 7
 SLEEP_BEFORE_CLOSE = 3
 SLEEP_AFTER_CLOSE = 2.5
 SLEEP_BEFORE_OPEN = 4.2
