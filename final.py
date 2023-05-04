@@ -501,7 +501,7 @@ def a_to_b(start_position, end_position, addDelay=0):
 
     # Move the actuator down to z=BOTTOM_Z and open the claw to drop the piece
     move(z=BOTTOM_Z)
-    sleep(SLEEP_BEFORE_OPEN)
+    sleep(SLEEP_AT_END)
     open()
     move(home=True)
 
