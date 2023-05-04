@@ -3,7 +3,7 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 BUTTON_PIN = 2
-GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 def button_callback(channel):
