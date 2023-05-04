@@ -558,6 +558,26 @@ def setSpeed():
         'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
 
+GPIO.setmode(GPIO.BCM)
+BUTTON_PIN = 2
+GPIO.setup(BUTTON_PIN, GPIO.IN)
+
+
+def button_callback():
+    print("Button pressed")
+    det_think_move()
+
+
+GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
+                      callback=button_callback, bouncetime=300)
+
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+
 def blitz():
     while True:
         det_think_move()
