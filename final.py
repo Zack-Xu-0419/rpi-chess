@@ -495,6 +495,20 @@ def a_to_b(start_position, end_position, addDelay=0):
     handle_castling(start_position, end_position)
 
 
+def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)):
+    x, y = ord(chess_coordinate[0].lower()) - \
+        ord('a') + 1, int(chess_coordinate[1])
+
+    x_range = board_top_right[0] - board_bottom_left[0]
+    y_range = board_top_right[1] - board_bottom_left[1]
+
+    actuator_x = board_bottom_left[0] + (x - 1) * x_range / 7 + OFFSET_X
+    actuator_y = board_bottom_left[1] + (y - 1) * y_range / 7 + OFFSET_Y
+
+    move(actuator_x, actuator_y)
+    return (actuator_x, actuator_y)
+
+
 def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
     global last_position
     if calibrate:
