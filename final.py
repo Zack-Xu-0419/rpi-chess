@@ -569,8 +569,8 @@ GPIO.setup(BUTTON_PIN, GPIO.IN)
 #     det_think_move()
 
 
-GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
-                      callback=button_callback, bouncetime=300)
+# GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
+#                       callback=button_callback, bouncetime=300)
 
 
 def button_monitor():
