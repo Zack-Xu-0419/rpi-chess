@@ -578,6 +578,13 @@ except KeyboardInterrupt:
     GPIO.cleanup()
 
 
+def quit():
+    move(home=True)
+    cleanup(pwm)
+    GPIO.cleanup()
+    exit(0)
+
+
 def blitz():
     while True:
         det_think_move()
