@@ -582,6 +582,13 @@ def button_monitor():
             time.sleep(0.3)
 
 
+def quit():
+    print("Quitting")
+    cleanup(pwm)
+    button_thread.join()
+    exit(0)
+
+
 def blitz():
     while True:
         det_think_move()
