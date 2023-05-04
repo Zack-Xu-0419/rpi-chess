@@ -14,6 +14,7 @@ import RPi.GPIO as GPIO
 import requests
 from time import sleep
 import threading
+from math import sqrt
 
 headers = {
     'Content-type': 'application/json',
@@ -432,13 +433,38 @@ def open():
 
 TOP_Z = 50
 BOTTOM_Z = 7
-SLEEP_BEFORE_CLOSE = 2
-SLEEP_AFTER_CLOSE = 2
-SLEEP_BEFORE_OPEN = 4
+MIN_SLEEP_BEFORE_CLOSE = 2
+MIN_SLEEP_AFTER_CLOSE = 2
+MIN_SLEEP_BEFORE_OPEN = 4
+
+MAX_SLEEP_BEFORE_CLOSE = 4
+MAX_SLEEP_AFTER_CLOSE = 2
+MAX_SLEEP_BEFORE_OPEN = 4
 SLEEP_AT_END = 2
 
 
 def a_to_b(start_position, end_position, addDelay=0):
+    time.sleep(addDelay)
+    start_square = chess.SQUARE_NAMES.index(start_position)
+    end_square = chess.SQUARE_NAMES.index(end_position)
+
+    # Calculate Euclidean distance between start and end positions
+    start_file, start_rank = divmod(start_square, 8)
+    end_file, end_rank = divmod(end_square, 8)
+    distance = sqrt((start_file - end_file) ** 2 +
+                    (start_rank - end_rank) ** 2)
+
+    # Calculate proportional delay based on distance and min/max wait times
+    max_distance = sqrt(8 ** 2 + 8 ** 2)
+    distance_factor = distance / max_distance
+
+    sleep_before_close = MIN_SLEEP_BEFORE_CLOSE + \
+        (MAX_SLEEP_BEFORE_CLOSE - MIN_SLEEP_BEFORE_CLOSE) * distance_factor
+    sleep_after_close = MIN_SLEEP_AFTER_CLOSE + \
+        (MAX_SLEEP_AFTER_CLOSE - MIN_SLEEP_AFTER_CLOSE) * distance_factor
+    sleep_before_open = MIN_SLEEP_BEFORE_OPEN + \
+        (MAX_SLEEP_BEFORE_OPEN - MIN_SLEEP_BEFORE_OPEN) * distance_factor
+
     time.sleep(addDelay)
     start_square = chess.SQUARE_NAMES.index(start_position)
     end_square = chess.SQUARE_NAMES.index(end_position)
