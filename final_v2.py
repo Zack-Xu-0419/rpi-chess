@@ -553,8 +553,8 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         last_position['y'] = y
         last_position['z'] = z
 
-    # print(requests.post(
-    #     'http://0.0.0.0/api/printer/command', headers=headers, json=json_data))
+    requests.post(
+        'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
 
 def det_think_move():
