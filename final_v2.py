@@ -388,9 +388,9 @@ def getMove():
 def DetectAndThink():
     rundet()
     computerMove = getMove()
-    # print(board)
-    # print("PREVIOUS:")
-    # print(previousBoard)
+    print(board)
+    print("PREVIOUS:")
+    print(previousBoard)
     print(computerMove)
     return computerMove
 
