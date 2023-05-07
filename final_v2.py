@@ -137,9 +137,9 @@ def crop(input):
     # Top left
     x1, y1 = 240, 7
     # Top right
-    x2, y2 = 1031, 7
+    x2, y2 = 1033, 7
     # Bottom right
-    x3, y3 = 1033, 792
+    x3, y3 = 1035, 792
     # Bottom left
     x4, y4 = 216, 786
 
