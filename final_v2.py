@@ -178,6 +178,7 @@ def captureImage():
 def getBoardState(output, edges=[0, 0, 0, 0]):
 
     output = crop(output)
+    print("called")
 
     # if edges[0] != 0:
     #     output = output[edges[0]:edges[1], edges[2]:edges[3]]
