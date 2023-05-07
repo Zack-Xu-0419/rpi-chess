@@ -30,7 +30,7 @@ last_position = {
 
 # Constants
 SERVO_PIN = 13
-FREQUENCY = 100  # 50Hz frequency (20ms period)
+FREQUENCY = 50  # 50Hz frequency (20ms period)
 MIN_DUTY_CYCLE = 2.5
 MAX_DUTY_CYCLE = 12.5
 pwm = None
