@@ -36,7 +36,7 @@ MAX_DUTY_CYCLE = 12.5
 pwm = None
 
 OFFSET_X = 0
-OFFSET_Y = +2
+OFFSET_Y = -2
 
 # Constants
 IP = '0.0.0.0'
