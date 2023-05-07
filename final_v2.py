@@ -29,14 +29,14 @@ last_position = {
 
 
 # Constants
-SERVO_PIN = 13
+SERVO_PIN = 13  # GPIO18 (Pin 12)
 FREQUENCY = 50  # 50Hz frequency (20ms period)
 MIN_DUTY_CYCLE = 2.5
 MAX_DUTY_CYCLE = 12.5
 pwm = None
 
 OFFSET_X = 0
-OFFSET_Y = -2
+OFFSET_Y = 2
 
 # Constants
 IP = '0.0.0.0'
@@ -137,9 +137,9 @@ def crop(input):
     # Top left
     x1, y1 = 240, 7
     # Top right
-    x2, y2 = 1033, 7
+    x2, y2 = 1031, 7
     # Bottom right
-    x3, y3 = 1035, 792
+    x3, y3 = 1033, 792
     # Bottom left
     x4, y4 = 216, 786
 
@@ -211,7 +211,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
 
     edges = cv.Canny(gray, 50, 100)
     circles = cv.HoughCircles(edges, cv.HOUGH_GRADIENT, 1,
-                              minRadius=10, maxRadius=30, param2=21, minDist=30)
+                              minRadius=10, maxRadius=30, param2=18, minDist=30)
 
     # print(len(circles))
     # ensure at least some circles were found
@@ -263,8 +263,8 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                 curr = gray_orig[int(j * dify + consty + dify/2-10): int((j+1) * dify+consty - dify/2+10), int(const+i *
                                  difx + difx/2-10):int(const+(i+1) * difx-difx/2+10)]
                 avg = np.mean(curr)
-                # print(avg)
-                if avg < 55:
+                print(avg)
+                if avg < 60:
                     row.append(2)
                 else:
                     row.append(1)
@@ -329,35 +329,33 @@ def rundet():
     pprint.pprint(fromWhite)
     if previousRes != []:
         difference, is_castling = getBoardDiff(fromWhite)
-        # print(is_castling)
+        print(is_castling)
         if not is_castling:
             pieceFrom = [letters[(difference[0][1])], 8-difference[0][0]]
             pieceTo = [letters[(difference[1][1])], 8-difference[1][0]]
 
             finalCommand = ""
 
-            # print("PIECEFROM:")
-            # print(pieceFrom)
-            # print("PIECETO?:")
-            # print(pieceTo)
+            print("PIECEFROM:")
+            print(pieceFrom)
+            print("PIECETO?:")
+            print(pieceTo)
             finalCommand = f"{pieceFrom[0]}{pieceFrom[1]}{pieceTo[0]}{pieceTo[1]}"
         else:
             finalCommand = difference  # castling move
 
-        # print(finalCommand)
+        print(finalCommand)
         board.push(chess.Move.from_uci(finalCommand))
         previousBoard = board.copy()
 
     previousRes = fromWhite
-    # print(board)
+    print(board)
 
 
 def getMove():
     fish.set_fen_position(board.fen())
     best_move = fish.get_best_move_time(1000)
-    fish.set_depth(10)
-    print("EVAL:" + f"{fish.get_evaluation()['value'] / 100:+.2f}")
-    fish.set_depth(20)
+    # print("EVAL:" + str(fish.get_evaluation()['value']/100))
     board.push(chess.Move.from_uci(best_move))
     letter1 = best_move[0]
     number1 = best_move[1]
@@ -370,11 +368,11 @@ def getMove():
         if letters[i] == (letter2):
             letter2 = i
 
-    # print(letter1, number1)
-    # previousRes[8-int(number1)][letter1] = 0
-    # print(letter2, number2)
-    # previousRes[8-int(number2)][letter2] = 2
-    # pprint.pprint(previousRes)
+    print(letter1, number1)
+    previousRes[8-int(number1)][letter1] = 0
+    print(letter2, number2)
+    previousRes[8-int(number2)][letter2] = 2
+    pprint.pprint(previousRes)
 
     return best_move
     # Track moves:
@@ -424,12 +422,12 @@ def cleanup(pwm):
 
 def close():
     global pwm
-    set_angle(pwm, 65)
+    set_angle(pwm, 75)
 
 
 def open():
     global pwm
-    set_angle(pwm, 45)
+    set_angle(pwm, 55)
 
 
 TOP_Z = 50
@@ -482,8 +480,8 @@ def a_to_b(start_position, end_position, addDelay=0):
     end_square = chess.SQUARE_NAMES.index(end_position)
 
     is_occupied = previousBoard.piece_at(end_square) is not None
-    # print(is_occupied)
-    # print(previousBoard.piece_at(end_square))
+    print(is_occupied)
+    print(previousBoard.piece_at(end_square))
 
     move(z=TOP_Z)
 
@@ -553,8 +551,8 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         last_position['y'] = y
         last_position['z'] = z
 
-    requests.post(
-        'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
+    print(requests.post(
+        'http://0.0.0.0/api/printer/command', headers=headers, json=json_data))
 
 
 def det_think_move():
@@ -587,7 +585,7 @@ GPIO.setup(BUTTON_PIN, GPIO.IN)
 def button_monitor():
     while True:
         if GPIO.input(BUTTON_PIN) == 0:  # Change to '1' if using a pull-down resistor
-            print("Thinking...")
+            print("Button pressed!")
             # Add a debounce delay to avoid multiple detections
             det_think_move()
             time.sleep(0.3)
