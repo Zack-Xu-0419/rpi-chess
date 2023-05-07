@@ -424,12 +424,12 @@ def cleanup(pwm):
 
 def close():
     global pwm
-    set_angle(pwm, 75)
+    set_angle(pwm, 82)
 
 
 def open():
     global pwm
-    set_angle(pwm, 55)
+    set_angle(pwm, 62)
 
 
 TOP_Z = 50
