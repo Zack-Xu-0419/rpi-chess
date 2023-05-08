@@ -576,29 +576,13 @@ BUTTON_PIN = 2
 GPIO.setup(BUTTON_PIN, GPIO.IN)
 
 
-# def button_callback():
-#     print("Button pressed")
-#     det_think_move()
+def button_callback():
+    print("Button pressed")
+    det_think_move()
 
 
 # GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
 #                       callback=button_callback, bouncetime=300)
-
-
-def button_monitor():
-    while True:
-        if GPIO.input(BUTTON_PIN) == 0:  # Change to '1' if using a pull-down resistor
-            print("Button pressed!")
-            # Add a debounce delay to avoid multiple detections
-            time.sleep(0.5)
-            det_think_move()
-
-
-def quit():
-    print("Quitting")
-    cleanup(pwm)
-    button_thread.join()
-    exit(0)
 
 
 def blitz():
@@ -612,8 +596,7 @@ def blitz():
 if __name__ == "__main__":
     pwm = setup()
     setSpeed()
-    button_thread = threading.Thread(target=button_monitor)
-    button_thread.start()
+    GPIO.add_event_detect(2, GPIO.RISING, callback=button_callback)
 
 # move(calibrate=True)
 # sleep(10)
