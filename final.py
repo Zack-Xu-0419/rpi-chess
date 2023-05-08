@@ -192,7 +192,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     cv.imwrite("out.jpg", hsv_img)
 
     # Define the range of green color in HSV
-    lower_green = np.array([60, 70, 80])
+    lower_green = np.array([60, 70, 60])
     upper_green = np.array([200, 255, 255])
 
     # Create a mask for green color
