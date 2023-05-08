@@ -590,8 +590,8 @@ def button_monitor():
         if GPIO.input(BUTTON_PIN) == 0:  # Change to '1' if using a pull-down resistor
             print("Button pressed!")
             # Add a debounce delay to avoid multiple detections
+            time.sleep(0.5)
             det_think_move()
-            time.sleep(0.3)
 
 
 def quit():
