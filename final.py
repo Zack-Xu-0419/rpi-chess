@@ -201,7 +201,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     # Apply the mask to the original image
     result = cv.bitwise_and(output, output, mask=green_mask)
 
-    cv.imwrite("../gray.jpg", resul)
+    cv.imwrite("../gray.jpg", result)
 
     gray = cv.cvtColor(cv.cvtColor(
         result, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY)
