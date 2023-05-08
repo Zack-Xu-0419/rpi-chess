@@ -207,6 +207,8 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
     gray_orig = cv.cvtColor(cv.cvtColor(
         hsv_img, cv.COLOR_HSV2BGR), cv.COLOR_BGR2GRAY)
 
+    cv.imwrite("../gray.jpg", gray)
+
     # Save output:
     origCropped = gray
 
