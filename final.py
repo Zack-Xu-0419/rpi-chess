@@ -579,6 +579,7 @@ GPIO.setup(BUTTON_PIN, GPIO.IN)
 def button_callback(a):
     print("BUTTON!")
     det_think_move()
+    print("Done")
 
 
 # GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
