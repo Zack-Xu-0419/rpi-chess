@@ -577,8 +577,7 @@ GPIO.setup(BUTTON_PIN, GPIO.IN)
 
 
 def button_callback(a):
-    print(a)
-    print("Button pressed")
+    print("BUTTON!")
     det_think_move()
 
 
