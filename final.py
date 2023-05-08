@@ -597,7 +597,7 @@ def blitz():
 if __name__ == "__main__":
     pwm = setup()
     setSpeed()
-    GPIO.add_event_detect(2, GPIO.RISING, callback=button_callback)
+    GPIO.add_event_detect(2, GPIO.FALLING, callback=button_callback)
 
 # move(calibrate=True)
 # sleep(10)
