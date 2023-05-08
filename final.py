@@ -14,6 +14,7 @@ import RPi.GPIO as GPIO
 import requests
 from time import sleep
 import threading
+from rpi_hardware_pwm import HardwarePWM
 
 headers = {
     'Content-type': 'application/json',
@@ -403,7 +404,7 @@ def setup():
     global pwm
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(SERVO_PIN, GPIO.OUT)
-    pwm = GPIO.PWM(SERVO_PIN, FREQUENCY)
+    pwm = HardwarePWM(pwm_channel=0, hz=50)
     pwm.start(0)
     return pwm
 
@@ -411,7 +412,7 @@ def setup():
 def set_angle(pwm, angle):
     duty_cycle = MIN_DUTY_CYCLE + \
         (angle / 180.0) * (MAX_DUTY_CYCLE - MIN_DUTY_CYCLE)
-    pwm.ChangeDutyCycle(duty_cycle)
+    pwm.change_duty_cycle(duty_cycle)
     time.sleep(1)
 
 
