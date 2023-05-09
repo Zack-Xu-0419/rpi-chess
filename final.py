@@ -418,7 +418,7 @@ def set_angle(pwm, angle):
     duty_cycle = MIN_DUTY_CYCLE + \
         (angle / 180.0) * (MAX_DUTY_CYCLE - MIN_DUTY_CYCLE)
     pwm.change_duty_cycle(duty_cycle)
-    time.sleep(1)
+    time.sleep(0.2)
 
 
 def cleanup(pwm):
@@ -439,7 +439,7 @@ def open():
 TOP_Z = 50
 BOTTOM_Z = 4
 SLEEP_BEFORE_CLOSE = 2
-SLEEP_AFTER_CLOSE = 0.2
+SLEEP_AFTER_CLOSE = 0
 SLEEP_BEFORE_OPEN = 3
 SLEEP_AT_END = 1
 
@@ -452,7 +452,7 @@ def move_piece_off(end_position, addDelay):
     move(z=TOP_Z)
     sleep(SLEEP_AFTER_CLOSE)
     move(x=240)
-    sleep(2)
+    sleep(0.2)
     open()
 
 
