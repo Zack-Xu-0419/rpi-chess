@@ -266,11 +266,11 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                     row.append(0)
             if not isSomething:
                 # If there is something, detect if it is white or black
-                curr = gray_orig[int(j * dify + consty + dify/2-5): int((j+1) * dify+consty - dify/2+5), int(const+i *
-                                 difx + difx/2-5):int(const+(i+1) * difx-difx/2+5)]
+                curr = gray_orig[int(j * dify + consty + dify/2-10): int((j+1) * dify+consty - dify/2+10), int(const+i *
+                                 difx + difx/2-10):int(const+(i+1) * difx-difx/2+10)]
                 avg = np.mean(curr)
                 print(avg)
-                if avg < 55:
+                if avg < 60:
                     row.append(2)
                 else:
                     row.append(1)
