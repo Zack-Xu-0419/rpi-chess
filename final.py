@@ -631,6 +631,9 @@ def submit():
         elif data == "home":
             move(home=True)
             return "Sucesss"
+        elif data == "reset":
+            reset()
+            return "Sucesss"
     else:
         return redirect(url_for('home'))
 

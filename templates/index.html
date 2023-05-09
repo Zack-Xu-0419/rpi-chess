@@ -31,6 +31,10 @@
         <input type="text" name="data" id="data" value="home" hidden required>
         <button type="submit">home</button>
     </form>
+    <form id="form6" method="POST">
+        <input type="text" name="data" id="data" value="reset" hidden required>
+        <button type="submit">reset</button>
+    </form>
 </body>
 <script>
     function submitForm(event, formId) {
@@ -72,6 +76,9 @@
         });
         $("#form5").submit(function (event) {
             submitForm(event, 'form5');
+        });
+        $("#form6").submit(function (event) {
+            submitForm(event, 'form6');
         });
     });
 </script>
