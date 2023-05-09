@@ -505,9 +505,6 @@ def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)
     x, y = ord(chess_coordinate[0].lower()) - \
         ord('a') + 1, int(chess_coordinate[1])
 
-    distance = sqrt((x - last_position['x'])**2 + (y - last_position['y'])**2)
-    sleep(distance*10)
-
     x_range = board_top_right[0] - board_bottom_left[0]
     y_range = board_top_right[1] - board_bottom_left[1]
 
@@ -515,6 +512,8 @@ def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)
     actuator_y = board_bottom_left[1] + (y - 1) * y_range / 7 + OFFSET_Y
 
     move(actuator_x, actuator_y)
+    distance = sqrt((x - last_position['x'])**2 + (y - last_position['y'])**2)
+    sleep(distance/10)
     return (actuator_x, actuator_y)
 
 
