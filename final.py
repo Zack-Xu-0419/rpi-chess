@@ -15,6 +15,9 @@ import requests
 from time import sleep
 import threading
 from rpi_hardware_pwm import HardwarePWM
+from math import sqrt
+# Import necessary libraries
+from flask import Flask, render_template, request, redirect, url_for
 
 headers = {
     'Content-type': 'application/json',
@@ -557,6 +560,9 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
     print(requests.post(
         'http://0.0.0.0/api/printer/command', headers=headers, json=json_data))
 
+    distance = sqrt((x - last_position['x'])**2 + (y - last_position['y'])**2)
+    sleep(distance/100)
+
 
 def det_think_move():
     move = DetectAndThink()
@@ -586,6 +592,31 @@ def button_callback(a):
 #                       callback=button_callback, bouncetime=300)
 
 
+app = Flask(__name__)
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+# Define a route for handling form data
+
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    if request.method == 'POST':
+        # Access form data
+        data = request.form['data']
+        # Process the data and return a response
+        if data == "det_think_move":
+            det_think_move()
+        elif data == "calibrate":
+            move(calibrate=True)
+        return 200
+    else:
+        return redirect(url_for('home'))
+
+
 def blitz():
     while True:
         det_think_move()
@@ -598,6 +629,7 @@ if __name__ == "__main__":
     pwm = setup()
     setSpeed()
     GPIO.add_event_detect(2, GPIO.FALLING, callback=button_callback)
+    app.run(debug=True, port=3000)
 
 # move(calibrate=True)
 # sleep(10)
