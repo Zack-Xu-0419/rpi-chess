@@ -23,9 +23,13 @@
         <input type="text" name="data" id="data" value="calibrate" hidden required>
         <button type="submit">Calibrate</button>
     </form>
-    <form id="form3" method="POST">
+    <form id="form4" method="POST">
         <input type="text" name="data" id="data" value="rundet" hidden required>
         <button type="submit">rundet</button>
+    </form>
+    <form id="form5" method="POST">
+        <input type="text" name="data" id="data" value="home" hidden required>
+        <button type="submit">home</button>
     </form>
 </body>
 <script>
@@ -65,6 +69,9 @@
         });
         $("#form4").submit(function (event) {
             submitForm(event, 'form4');
+        });
+        $("#form5").submit(function (event) {
+            submitForm(event, 'form5');
         });
     });
 </script>

@@ -625,6 +625,9 @@ def submit():
         elif data == "rundet":
             rundet()
             return "Sucesss"
+        elif data == "home":
+            move(home=True)
+            return "Sucesss"
     else:
         return redirect(url_for('home'))
 
