@@ -516,11 +516,17 @@ def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)
 
 
 def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
+    x = x
+    y = y
+    z = z
     global last_position
     if calibrate:
         json_data = {
             'command': f'G28'
         }
+        x = 0
+        y = 240
+        z = TOP_Z
     elif home:
 
         json_data = {
@@ -537,8 +543,11 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         }
         # Update the last sent position
         last_position['x'] = 0
+        x = 0
         last_position['y'] = 240
+        y = 240
         last_position['z'] = TOP_Z
+        z = TOP_Z
         requests.post(
             'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
