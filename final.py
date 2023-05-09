@@ -452,7 +452,7 @@ def move_piece_off(end_position, addDelay):
     move(z=TOP_Z)
     sleep(SLEEP_AFTER_CLOSE)
     move(x=240)
-    sleep(0.2)
+    sleep(2)
     open()
 
 
