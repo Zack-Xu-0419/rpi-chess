@@ -619,6 +619,10 @@ def submit():
         # Process the data and return a response
         if data == "det_think_move":
             det_think_move()
+            fish.set_depth(14)
+            fish.get_evaluation()
+            fish.set_depth(20)
+            return ("EVAL:" + str(fish.get_evaluation()['value']/100))
         elif data == "calibrate":
             move(calibrate=True)
             return "Sucesss"
