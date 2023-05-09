@@ -585,15 +585,15 @@ def setSpeed():
         'http://0.0.0.0/api/printer/command', headers=headers, json=json_data)
 
 
-GPIO.setmode(GPIO.BCM)
-BUTTON_PIN = 2
-GPIO.setup(BUTTON_PIN, GPIO.IN)
+# GPIO.setmode(GPIO.BCM)
+# BUTTON_PIN = 2
+# GPIO.setup(BUTTON_PIN, GPIO.IN)
 
 
-def button_callback(a):
-    print("BUTTON!")
-    det_think_move()
-    print("Done")
+# def button_callback(a):
+#     print("BUTTON!")
+#     det_think_move()
+#     print("Done")
 
 
 # GPIO.add_event_detect(BUTTON_PIN, GPIO.RISING,
@@ -646,7 +646,7 @@ def blitz():
 if __name__ == "__main__":
     pwm = setup()
     setSpeed()
-    GPIO.add_event_detect(2, GPIO.FALLING, callback=button_callback)
+    # GPIO.add_event_detect(2, GPIO.FALLING, callback=button_callback)
     app.run(debug=True, host='0.0.0.0', port='3000')
 
 # move(calibrate=True)
