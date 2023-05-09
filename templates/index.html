@@ -5,52 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Submission</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <h1>3D Printer Chess Control</h1>
-    <form action="/submit" method="POST">
+    <form id="form1" method="POST">
         <label for="data">Enter your data:</label>
         <input type="text" name="data" id="data" required>
         <button type="submit">Submit</button>
     </form>
-    <form action="/submit" method="POST">
+    <form id="form2" method="POST">
         <input type="text" name="data" id="data" value="det_think_move" hidden required>
         <button type="submit">Det_Think_Move</button>
     </form>
-    <form action="/submit" method="POST">
+    <form id="form3" method="POST">
         <input type="text" name="data" id="data" value="calibrate" hidden required>
         <button type="submit">Calibrate</button>
     </form>
 </body>
-<!-- index.html -->
 <script>
+    function submitForm(event, formId) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Get the form data
+        const formData = {
+            'data': $(`#${formId} input[name=data]`).val(),
+        };
+
+        // Send the form data using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/submit',
+            data: formData,
+            dataType: 'text', // Expected data type of the response
+            encode: true
+        }).done(function (response) {
+            // Handle the response from the server
+            alert(response);
+        }).fail(function () {
+            // Handle errors
+            alert('An error occurred while submitting the form.');
+        });
+    }
+
     $(document).ready(function () {
-        $("#my-form").submit(function (event) {
-            event.preventDefault(); // Prevent the default form submission behavior
-
-            // Get the form data
-            const formData = {
-                'data': $('input[name=data]').val(),
-            };
-
-            // Send the form data using AJAX
-            $.ajax({
-                type: 'POST',
-                url: '/submit',
-                data: formData,
-                dataType: 'text', // Expected data type of the response
-                encode: true
-            }).done(function (response) {
-                // Handle the response from the server
-                alert(response);
-            }).fail(function () {
-                // Handle errors
-                alert('An error occurred while submitting the form.');
-            });
+        $("#form1").submit(function (event) {
+            submitForm(event, 'form1');
+        });
+        $("#form2").submit(function (event) {
+            submitForm(event, 'form2');
+        });
+        $("#form3").submit(function (event) {
+            submitForm(event, 'form3');
         });
     });
 </script>
-
 
 </html>

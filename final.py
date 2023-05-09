@@ -621,7 +621,7 @@ def submit():
             det_think_move()
         elif data == "calibrate":
             move(calibrate=True)
-        return 200
+        return "Sucesss"
     else:
         return redirect(url_for('home'))
 
