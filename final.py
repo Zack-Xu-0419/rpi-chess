@@ -621,7 +621,10 @@ def submit():
             det_think_move()
         elif data == "calibrate":
             move(calibrate=True)
-        return "Sucesss"
+            return "Sucesss"
+        elif data == "rundet":
+            rundet()
+            return "Sucesss"
     else:
         return redirect(url_for('home'))
 
