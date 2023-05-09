@@ -643,6 +643,17 @@ def blitz():
             print(20 - i - 1)
 
 
+def reset():
+    global previousBoard
+    global previousRes
+    global board
+    previousRes = []
+
+    previousBoard = chess.Board()
+
+    board = chess.Board()
+
+
 if __name__ == "__main__":
     pwm = setup()
     setSpeed()
