@@ -513,7 +513,7 @@ def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)
 
     move(actuator_x, actuator_y)
     distance = sqrt((x - last_position['x'])**2 + (y - last_position['y'])**2)
-    sleep(distance/10)
+    sleep(distance/100)
     return (actuator_x, actuator_y)
 
 
