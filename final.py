@@ -418,7 +418,7 @@ def set_angle(pwm, angle):
     duty_cycle = MIN_DUTY_CYCLE + \
         (angle / 180.0) * (MAX_DUTY_CYCLE - MIN_DUTY_CYCLE)
     pwm.change_duty_cycle(duty_cycle)
-    time.sleep(0.6)
+    time.sleep(1)
 
 
 def cleanup(pwm):
