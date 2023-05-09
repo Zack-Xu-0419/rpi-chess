@@ -570,7 +570,7 @@ def move(x=None, y=None, z=None, calibrate=False, home=False, speed=3000):
         'http://0.0.0.0/api/printer/command', headers=headers, json=json_data))
 
     distance = sqrt((x - last_position['x'])**2 + (y - last_position['y'])**2)
-    sleep(distance/100)
+    sleep(distance/1)
 
 
 def det_think_move():
