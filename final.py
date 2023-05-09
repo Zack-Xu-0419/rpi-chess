@@ -418,7 +418,7 @@ def set_angle(pwm, angle):
     duty_cycle = MIN_DUTY_CYCLE + \
         (angle / 180.0) * (MAX_DUTY_CYCLE - MIN_DUTY_CYCLE)
     pwm.change_duty_cycle(duty_cycle)
-    time.sleep(0.2)
+    time.sleep(1)
 
 
 def cleanup(pwm):
@@ -438,7 +438,7 @@ def open():
 
 TOP_Z = 50
 BOTTOM_Z = 4
-SLEEP_BEFORE_CLOSE = 1
+SLEEP_BEFORE_CLOSE = 2
 SLEEP_AFTER_CLOSE = 0.2
 SLEEP_BEFORE_OPEN = 3
 SLEEP_AT_END = 1
@@ -513,7 +513,7 @@ def goto(chess_coordinate, board_bottom_left=(5, 30), board_top_right=(200, 223)
 
     move(actuator_x, actuator_y)
     distance = sqrt((x - last_position['x'])**2 + (y - last_position['y'])**2)
-    sleep(distance/50)
+    sleep(distance/250)
     return (actuator_x, actuator_y)
 
 
