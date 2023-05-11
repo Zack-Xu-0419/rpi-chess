@@ -622,6 +622,7 @@ def submit():
         # Process the data and return a response
         try:
             threshold = int(data)
+            return "Updated Threshold"
         except:
             if data == "det_think_move":
                 det_think_move()
