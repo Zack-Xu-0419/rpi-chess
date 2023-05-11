@@ -182,6 +182,7 @@ def captureImage():
 
 
 def getBoardState(output, edges=[0, 0, 0, 0]):
+    global threshold
 
     output = crop(output)
 
@@ -272,7 +273,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                                  difx + difx/2-10):int(const+(i+1) * difx-difx/2+10)]
                 avg = np.mean(curr)
                 print(avg)
-                if avg < 80:
+                if avg < threshold:
                     row.append(2)
                 else:
                     row.append(1)
