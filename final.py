@@ -31,6 +31,8 @@ last_position = {
     'z': 40,
 }
 
+threshold = 80
+
 
 # Constants
 SERVO_PIN = 13  # GPIO18 (Pin 12)
@@ -270,7 +272,7 @@ def getBoardState(output, edges=[0, 0, 0, 0]):
                                  difx + difx/2-10):int(const+(i+1) * difx-difx/2+10)]
                 avg = np.mean(curr)
                 print(avg)
-                if avg < 110:
+                if avg < 80:
                     row.append(2)
                 else:
                     row.append(1)
@@ -612,28 +614,32 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def submit():
+    global threshold
     if request.method == 'POST':
         # Access form data
         data = request.form['data']
         # Process the data and return a response
-        if data == "det_think_move":
-            det_think_move()
-            fish.set_depth(10)
-            eval = fish.get_evaluation()['value']/100
-            fish.set_depth(20)
-            return "EVAL:" + str(eval)
-        elif data == "calibrate":
-            move(calibrate=True)
-            return "Sucesss"
-        elif data == "rundet":
-            rundet()
-            return "Sucesss"
-        elif data == "home":
-            move(home=True)
-            return "Sucesss"
-        elif data == "reset":
-            reset()
-            return "Sucesss"
+        try:
+            threshold = int(data)
+        except:
+            if data == "det_think_move":
+                det_think_move()
+                fish.set_depth(10)
+                eval = fish.get_evaluation()['value']/100
+                fish.set_depth(20)
+                return "EVAL:" + str(eval)
+            elif data == "calibrate":
+                move(calibrate=True)
+                return "Sucesss"
+            elif data == "rundet":
+                rundet()
+                return "Sucesss"
+            elif data == "home":
+                move(home=True)
+                return "Sucesss"
+            elif data == "reset":
+                reset()
+                return "Sucesss"
     else:
         return redirect(url_for('home'))
 
